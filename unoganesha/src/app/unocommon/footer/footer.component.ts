@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'uno-footer',
   templateUrl: './footer.component.html',
