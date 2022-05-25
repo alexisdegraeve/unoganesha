@@ -4,7 +4,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
 
-
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -15,7 +14,8 @@ import { FooterComponent } from './footer/footer.component';
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CommonModule
   ]
 })
 export class UnocommonModule { }
