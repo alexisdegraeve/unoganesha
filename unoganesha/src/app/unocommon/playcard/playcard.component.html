@@ -1,14 +1,23 @@
 {{ figure }} {{ color }}
-<div class="carduno carduno-yellow" [ngClass]="{'carduno-yellow': colorUno.Yellow === color, 'carduno-black': colorUno.Black === color, 'carduno-blue': colorUno.Blue === color, 'carduno-green': colorUno.Green === color, 'carduno-red': colorUno.Red === color     }">
-    <div class="carduno-inside">
-        <div class="uno-number">
-            <span class="uno-txt"> {{ figure }}</span>
-        </div>
-        <div class="card-uno-ellipsis">
-            <span class="uno-txt"> {{ figure }}</span>
-        </div>
-        <div class="uno-number-end">
-            <span class="uno-txt"> {{ figure }}</span>
+<div class="carduno" (click)="switchSide=!switchSide" [ngClass]="{'carduno-yellow': colorUno.Yellow === color, 'carduno-black': colorUno.Black === color, 'carduno-blue': colorUno.Blue === color, 'carduno-green': colorUno.Green === color, 'carduno-red': colorUno.Red === color, 'carduno-rotate' : switchSide }">
+    <div class="carduno-front">
+        <div class="carduno-inside">
+            <div class="uno-number">
+                <span class="uno-txt"> {{ figure }}</span>
+            </div>
+            <div class="card-uno-ellipsis">
+                <span class="uno-txt"> {{ figure }}</span>
+            </div>
+            <div class="uno-number-end">
+                <span class="uno-txt"> {{ figure }}</span>
+            </div>
         </div>
     </div>
+
+    <div class="carduno-back">
+        <div class="carduno-inside">
+            TEST
+        </div>
+    </div>
+
 </div>

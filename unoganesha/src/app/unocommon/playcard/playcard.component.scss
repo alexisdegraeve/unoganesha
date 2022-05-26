@@ -3,11 +3,34 @@ $card-green: #71b048;
 $card-blue: #029ad9;
 $card-red: #ed1f21;
 $card-black: #1e1916;
+.carduno-rotate {
+    transform: rotateY(180deg);
+}
+
+.carduno-front,
+.carduno-back {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 4%;
+}
+
+.carduno-back {
+    transform: rotateY(180deg);
+}
+
 .carduno {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
     height: 250px;
     width: 190px;
     border-radius: 8px;
-    padding: 4%;
     box-shadow: 5px 5px 10px;
     .carduno-inside {
         border-radius: 8px;
