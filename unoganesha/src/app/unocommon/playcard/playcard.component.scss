@@ -1,0 +1,51 @@
+.carduno {
+    height: 250px;
+    width: 190px;
+    border-radius: 8px;
+    padding: 4%;
+    box-shadow: 5px 5px 10px;
+    .carduno-inside {
+        background-color: yellow;
+        border-radius: 8px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        .uno-number {
+            position: absolute;
+            width: 50px;
+            margin-left: 10px;
+        }
+        .uno-number-end {
+            display: flex;
+            margin-top: -20px;
+            margin-right: 10px;
+            justify-content: flex-end;
+        }
+        .uno-txt {
+            font-size: 30px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px #333;
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #333;
+        }
+        .card-uno-ellipsis {
+            height: 85%;
+            width: 100%;
+            transform: skew(-15deg, -15deg);
+            background-color: #fff;
+            border-radius: 50%;
+            margin-top: 9%;
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .uno-txt {
+                transform: skew(15deg, 15deg);
+                font-size: 130px;
+                color: yellow;
+            }
+        }
+    }
+}

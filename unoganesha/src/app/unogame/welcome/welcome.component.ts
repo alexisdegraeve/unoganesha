@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ColorUno } from 'src/app/unocommon/Enum/color';
+import { FigureUno } from 'src/app/unocommon/Enum/figure';
 
 @Component({
   selector: 'uno-welcome',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
+  colorUno: typeof ColorUno = ColorUno;
+  figureUno: typeof FigureUno = FigureUno;
 
   constructor() { }
 

@@ -2,6 +2,10 @@
 <div class="container">
     <h1>Uno</h1>
 
+    <div class="uno-grid">
+        <uno-playcard [color]="colorUno.Black" [figure]="figureUno.NUM0" *ngFor='let number of [0,1,2,3,4]'></uno-playcard>
+    </div>
+
     <div class="card">
         <div class="card-header">
             Test
