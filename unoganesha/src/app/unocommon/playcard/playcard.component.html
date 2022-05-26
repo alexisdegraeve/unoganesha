@@ -1,14 +1,14 @@
 {{ figure }} {{ color }}
-<div class="carduno">
+<div class="carduno carduno-yellow" [ngClass]="{'carduno-yellow': colorUno.Yellow === color, 'carduno-black': colorUno.Black === color, 'carduno-blue': colorUno.Blue === color, 'carduno-green': colorUno.Green === color, 'carduno-red': colorUno.Red === color     }">
     <div class="carduno-inside">
         <div class="uno-number">
-            <span class="uno-txt"> 2</span>
+            <span class="uno-txt"> {{ figure }}</span>
         </div>
         <div class="card-uno-ellipsis">
-            <span class="uno-txt"> 2</span>
+            <span class="uno-txt"> {{ figure }}</span>
         </div>
         <div class="uno-number-end">
-            <span class="uno-txt"> 2</span>
+            <span class="uno-txt"> {{ figure }}</span>
         </div>
     </div>
 </div>

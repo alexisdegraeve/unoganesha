@@ -1,4 +1,8 @@
-$card-yellow: #f4db36;
+$card-yellow: #f2dc33;
+$card-green: #71b048;
+$card-blue: #029ad9;
+$card-red: #ed1f21;
+$card-black: #1e1916;
 .carduno {
     height: 250px;
     width: 190px;
@@ -6,7 +10,6 @@ $card-yellow: #f4db36;
     padding: 4%;
     box-shadow: 5px 5px 10px;
     .carduno-inside {
-        background-color: $card-yellow;
         border-radius: 8px;
         width: 100%;
         height: 100%;
@@ -48,8 +51,39 @@ $card-yellow: #f4db36;
             .uno-txt {
                 transform: skew(15deg, 15deg);
                 font-size: 130px;
-                color: $card-yellow;
+                text-shadow: 4px 2px #333;
             }
         }
     }
+}
+
+@mixin cardunocolor($mcolor, $tcolor) {
+    .carduno-inside {
+        background-color: $mcolor;
+        .card-uno-ellipsis {
+            .uno-txt {
+                color: $tcolor;
+            }
+        }
+    }
+}
+
+.carduno-yellow {
+    @include cardunocolor($card-yellow, $card-yellow);
+}
+
+.carduno-black {
+    @include cardunocolor($card-black, #fff);
+}
+
+.carduno-blue {
+    @include cardunocolor($card-blue, $card-blue);
+}
+
+.carduno-red {
+    @include cardunocolor($card-red, $card-red);
+}
+
+.carduno-green {
+    @include cardunocolor($card-green, $card-green);
 }

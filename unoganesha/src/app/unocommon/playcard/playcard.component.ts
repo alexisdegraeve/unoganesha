@@ -10,6 +10,7 @@ import { FigureUno } from '../Enum/figure';
 export class PlaycardComponent implements OnInit {
   @Input() figure: FigureUno = FigureUno.NUM0;
   @Input() color: ColorUno = ColorUno.Black; 
+  colorUno = ColorUno;
 
   constructor() { }
 
