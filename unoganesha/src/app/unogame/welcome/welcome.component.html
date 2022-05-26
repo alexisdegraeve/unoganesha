@@ -1,19 +1,18 @@
 <uno-header></uno-header>
 <div class="container">
-    <h1>Uno</h1>
 
-    <div class="uno-grid">
-        <uno-playcard [color]="colorUno.Black" [figure]="figureUno.NUM0" *ngFor='let number of [0,1,2,3,4]'></uno-playcard>
-    </div>
-
-    <div class="card">
+    <div class="card my-4">
         <div class="card-header">
-            Test
+            <b>Welcome to the Game</b>
         </div>
         <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
+            <h5 class="card-title">UNO GAME</h5>
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary"> somewhere</a>
+            <a href="#" class="btn btn-lg btn-danger"> START</a>
+
+            <div class="uno-grid">
+                <uno-playcard [color]="colorUno.Black" [figure]="figureUno.NUM0" *ngFor='let number of [0,1,2,3,4]'></uno-playcard>
+            </div>
         </div>
     </div>
 </div>

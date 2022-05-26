@@ -1,5 +1,6 @@
 .uno-grid {
-    display: grid;
-    gap: 1px;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
 }
