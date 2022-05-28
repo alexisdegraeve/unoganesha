@@ -7,6 +7,20 @@
                     <span *ngSwitchCase="figureUno.PASSE" class="uno-txt"> <i class="fas fa-ban "></i></span>
                     <span *ngSwitchCase="figureUno.INV" class="uno-txt"><i class="fa-solid fa-arrows-up-down"></i></span>
 
+                    <div *ngSwitchCase="figureUno.JOKER" class="card-uno-ellipsis carduno-ext-four card-uno-ellipsis-small">
+                        <div class="carduno-four">
+                            <div class="carduno-row">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="carduno-row">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <span *ngSwitchDefault class="uno-txt "> {{ getCardNumber(card.figure) }}</span>
                 </ng-container>
             </div>
@@ -16,6 +30,17 @@
                     <span *ngSwitchCase="figureUno.PASSE" class="uno-txt"> <i class="fas fa-ban "></i></span>
                     <span *ngSwitchCase="figureUno.INV" class="uno-txt"><i class="fa-solid fa-arrows-up-down"></i></span>
 
+                    <div *ngSwitchCase="figureUno.PLUS2" class="carduno-plus-two">
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                    <div *ngSwitchCase="figureUno.PLUS4" class="carduno-plus-four">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
 
                     <div *ngSwitchCase="figureUno.JOKER" class="carduno-four">
                         <div class="carduno-row">
@@ -32,6 +57,7 @@
 
                     <span *ngSwitchDefault class="uno-txt "> {{ getCardNumber(card.figure) }}</span>
 
+
                 </ng-container>
 
             </div>
@@ -40,6 +66,18 @@
                 <ng-container [ngSwitch]="card.figure">
                     <span *ngSwitchCase="figureUno.PASSE" class="uno-txt"> <i class="fas fa-ban "></i></span>
                     <span *ngSwitchCase="figureUno.INV" class="uno-txt"><i class="fa-solid fa-arrows-up-down"></i></span>
+                    <div *ngSwitchCase="figureUno.JOKER" class="card-uno-ellipsis carduno-ext-four card-uno-ellipsis-small">
+                        <div class="carduno-four">
+                            <div class="carduno-row">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="carduno-row">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
                     <span *ngSwitchDefault class="uno-txt "> {{ getCardNumber(card.figure) }}</span>
                 </ng-container>
             </div>
