@@ -1,25 +1,67 @@
 <uno-header></uno-header>
-<div class="container">
+<div class="container-fluid pb-5">
 
-    <div class="card my-4">
-        <div class="card-header">
-            <h5 class="card-title">UNO GAME</h5>
-        </div>
-        <div class="card-body">
-            <div class="uno-grid">
-                <ng-container *ngFor="let card of gamecard">
-                    <uno-playcard [card]="card"></uno-playcard>
-                </ng-container>
-                <!-- <uno-playcard  [color]="colorUno.Yellow" [figure]="figureUno.NUM2"></uno-playcard>
-                <uno-playcard [color]="colorUno.Black" [figure]="figureUno.NUM1"></uno-playcard>
-                <uno-playcard [color]="colorUno.Red" [figure]="figureUno.NUM3"></uno-playcard>
-                <uno-playcard [color]="colorUno.Blue" [figure]="figureUno.NUM5"></uno-playcard> !-->
+    <h5 class="card-title">UNO GAME</h5>
+    <hr />
+
+    <div class="row">
+        <div class="col-5">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Player 1 (Human)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="uno-grid">
+                        <ng-container *ngFor="let card of player1">
+                            <uno-playcard [card]="card"></uno-playcard>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Score :
+                </div>
             </div>
         </div>
-        <div class="card-footer">
-            <a [routerLink]="'/game'" href="#" class="btn btn-lg btn-primary"> RESTART</a>
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Arbitrator</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="uno-grid">
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Your arbitrator
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Player 2 (Computer)</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="uno-grid">
+                        <ng-container *ngFor="let card of player2">
+                            <uno-playcard [card]="card"></uno-playcard>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Score :
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
+    <a type="button" class="btn btn-lg btn-primary" (click)="startGame()"> START</a>
 </div>
 
 <uno-footer></uno-footer>

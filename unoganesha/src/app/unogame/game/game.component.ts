@@ -14,16 +14,27 @@ export class GameComponent implements OnInit {
 
   gamecard: Array<ICardUno>=[];
 
+  player1:  Array<ICardUno>=[];
+  player2:  Array<ICardUno>=[];
+
   constructor() { }
 
   ngOnInit(): void {
+    
+  }
+
+  startGame(): void {
     this.initGame();
+    this.shuffleCards();
+    this.distributeCard();
+    console.log('cards ', this.gamecard);
+    console.log('player1 ', this.player1);
+    console.log('player2 ', this.player2);
   }
 
   initGame() {
     this.initCards();
-    console.log(this.gamecard.length);
-    //this.shuffleCards();
+    console.log(this.gamecard.length);    
   }
 
   initCards(){
@@ -58,5 +69,12 @@ export class GameComponent implements OnInit {
       this.gamecard[index] = swap;
     }
     console.log(' shuffle ', this.gamecard);
+  }
+
+  distributeCard() {
+    let newArrayPlayer1 = this.gamecard.splice(0, 7);
+    this.player1 = newArrayPlayer1;
+    let newArrayPlayer2 = this.gamecard.splice(0, 7);
+    this.player2 = newArrayPlayer2;
   }
 }  
