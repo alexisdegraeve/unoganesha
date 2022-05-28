@@ -1,10 +1,37 @@
 .navbar-brand {
     font-size: 25px;
     text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    background: red;
+    border-radius: 50%;
 }
 
 .uno-ganesha-logo {
     font-family: "Lucida Handwriting";
-    font-size: 15px;
+    font-size: 10px;
     color: antiquewhite;
+    position: absolute;
+    bottom: 5px;
+    margin-left: 5px;
+    transform: rotateZ(-5deg);
+}
+
+.uno-ganesha-logo-right {
+    text-shadow: -4px 1px 1px #000;
+    -webkit-text-stroke-width: 0.01em;
+    -webkit-text-stroke-color: #fff;
+    color: #f2dc33;
+    font-weight: bold;
+    font-size: 25px;
+    outline-width: thick;
+}
+
+.uno-red-circle {
+    width: 160px;
+    height: 100%;
+    position: absolute;
+    background: red;
+    z-index: 30;
+    left: 0;
 }
