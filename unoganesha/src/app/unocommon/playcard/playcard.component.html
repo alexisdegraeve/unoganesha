@@ -1,14 +1,14 @@
-<div class="carduno" (click)="switchSide=!switchSide" [ngClass]="getCardColor(card, switchSide)">
+<div class="carduno" (click)="switchSide=!switchSide" [ngClass]="getCardColor(card.color, switchSide)">
     <div class="carduno-front">
         <div class="carduno-inside">
             <div class="uno-number">
-                <span class="uno-txt"> {{ getCardNumber(card) }}</span>
+                <span class="uno-txt"> {{ getCardNumber(card.figure) }}</span>
             </div>
             <div class="card-uno-ellipsis">
-                <span class="uno-txt"> {{ getCardNumber(card) }}</span>
+                <span class="uno-txt"> {{ getCardNumber(card.figure) }}</span>
             </div>
             <div class="uno-number-end">
-                <span class="uno-txt"> {{ getCardNumber(card) }}</span>
+                <span class="uno-txt"> {{ getCardNumber(card.figure) }}</span>
             </div>
         </div>
     </div>

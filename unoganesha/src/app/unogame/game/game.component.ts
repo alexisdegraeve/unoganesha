@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ColorUno } from 'src/app/unocommon/Enum/color';
 import { FigureUno } from 'src/app/unocommon/Enum/figure';
+import { ICardUno } from 'src/app/unocommon/Model/carduno';
 
 @Component({
   selector: 'uno-game',
@@ -10,7 +11,8 @@ import { FigureUno } from 'src/app/unocommon/Enum/figure';
 export class GameComponent implements OnInit {
   colorUno: typeof ColorUno = ColorUno;
   figureUno: typeof FigureUno = FigureUno;  
-  gamecard: Array<number>=[];
+
+  gamecard: Array<ICardUno>=[];
 
   constructor() { }
 
@@ -24,15 +26,29 @@ export class GameComponent implements OnInit {
   }
 
   initCards(){
-    for (let index = 0; index < 108; index++) {
-      this.gamecard.push(index);
+
+    for(let i=0; i<4; i++) {      
+      for(let j=0; j<10; j++)  {                
+        let card: ICardUno  = {figure: j, color: i};
+         this.gamecard.push( card);
+      }
+      for(let j=1; j<10; j++)  {
+        let card: ICardUno  = {figure: j, color: i};
+        this.gamecard.push(card );
+     }
     }
+
+/*    for (let index = 0; index < 108; index++) {};
+
+
+      this.gamecard.push(index);
+    }*/
     console.log(' original ', this.gamecard);
   }
 
   shuffleCards() {
-    for (let index = 0; index < 108; index++) {
-      let j = Math.floor(Math.random() * 108);
+    for (let index = 0; index < this.gamecard.length; index++) {
+      let j = Math.floor(Math.random() *  this.gamecard.length);
       let swap = this.gamecard[j];
       this.gamecard[j] = this.gamecard[index];
       this.gamecard[index] = swap;
