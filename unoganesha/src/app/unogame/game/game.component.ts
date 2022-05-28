@@ -22,6 +22,7 @@ export class GameComponent implements OnInit {
 
   initGame() {
     this.initCards();
+    console.log(this.gamecard.length);
     //this.shuffleCards();
   }
 

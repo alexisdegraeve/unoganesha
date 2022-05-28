@@ -13,6 +13,8 @@ export class PlaycardComponent implements OnInit {
   colorUno = ColorUno;
   switchSide = false;
   colors = ["blue", "red", "yellow","green","black"];
+  figureUno: typeof FigureUno = FigureUno;  
+
 
   constructor() { }
 
