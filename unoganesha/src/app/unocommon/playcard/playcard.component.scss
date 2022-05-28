@@ -103,7 +103,7 @@ $card-black: #1e1916;
     }
 }
 
-@mixin cardunocolor($mcolor, $tcolor) {
+@mixin cardunocolor($mcolor, $tcolor, $tlogo) {
     .carduno-inside {
         background-color: $mcolor;
         .card-uno-ellipsis {
@@ -112,26 +112,41 @@ $card-black: #1e1916;
             }
         }
     }
+    .carduno-back {
+        .carduno-inside {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .carduno-logo {
+                width: 8rem;
+                height: 8rem;
+                svg {
+                    fill: $tlogo;
+                }
+            }
+        }
+    }
 }
 
 .carduno-yellow {
-    @include cardunocolor($card-yellow, $card-yellow);
+    @include cardunocolor($card-yellow, $card-yellow, #000);
 }
 
 .carduno-black {
-    @include cardunocolor($card-black, #fff);
+    @include cardunocolor($card-black, #fff, #fff);
 }
 
 .carduno-blue {
-    @include cardunocolor($card-blue, $card-blue);
+    @include cardunocolor($card-blue, $card-blue, #fff);
 }
 
 .carduno-red {
-    @include cardunocolor($card-red, $card-red);
+    @include cardunocolor($card-red, $card-red, #fff);
 }
 
 .carduno-green {
-    @include cardunocolor($card-green, $card-green);
+    @include cardunocolor($card-green, $card-green, #fff);
 }
 
 .carduno-logo {

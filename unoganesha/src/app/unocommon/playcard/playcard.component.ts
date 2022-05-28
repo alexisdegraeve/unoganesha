@@ -11,7 +11,7 @@ import { ICardUno } from '../Model/carduno';
 export class PlaycardComponent implements OnInit {
   @Input() card :ICardUno = {figure: 1, color: ColorUno.Black};
   colorUno = ColorUno;
-  switchSide = false;
+  switchSide = true;
   colors = ["blue", "red", "yellow","green","black"];
   figureUno: typeof FigureUno = FigureUno;  
 
