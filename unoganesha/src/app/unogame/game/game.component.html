@@ -8,7 +8,7 @@
         <div class="card-body">
             <div class="uno-grid">
                 <ng-container *ngFor="let card of gamecard">
-                    <uno-playcard [color]="colorUno.Yellow" [figure]="card"></uno-playcard>
+                    <uno-playcard [card]="card"></uno-playcard>
                 </ng-container>
                 <!-- <uno-playcard  [color]="colorUno.Yellow" [figure]="figureUno.NUM2"></uno-playcard>
                 <uno-playcard [color]="colorUno.Black" [figure]="figureUno.NUM1"></uno-playcard>

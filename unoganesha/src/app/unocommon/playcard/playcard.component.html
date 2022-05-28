@@ -1,15 +1,14 @@
-{{ figure }} {{ color }}
-<div class="carduno" (click)="switchSide=!switchSide" [ngClass]="{'carduno-yellow': colorUno.Yellow === color, 'carduno-black': colorUno.Black === color, 'carduno-blue': colorUno.Blue === color, 'carduno-green': colorUno.Green === color, 'carduno-red': colorUno.Red === color, 'carduno-rotate' : switchSide }">
+<div class="carduno" (click)="switchSide=!switchSide" [ngClass]="getCardColor(card)">
     <div class="carduno-front">
         <div class="carduno-inside">
             <div class="uno-number">
-                <span class="uno-txt"> {{ figure }}</span>
+                <span class="uno-txt"> {{ card }}</span>
             </div>
             <div class="card-uno-ellipsis">
-                <span class="uno-txt"> {{ figure }}</span>
+                <span class="uno-txt"> {{ card }}</span>
             </div>
             <div class="uno-number-end">
-                <span class="uno-txt"> {{ figure }}</span>
+                <span class="uno-txt"> {{ card }}</span>
             </div>
         </div>
     </div>

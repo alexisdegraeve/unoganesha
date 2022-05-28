@@ -20,7 +20,7 @@ export class GameComponent implements OnInit {
 
   initGame() {
     this.initCards();
-    this.shuffleCards();
+    //this.shuffleCards();
   }
 
   initCards(){
