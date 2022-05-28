@@ -26,24 +26,27 @@ export class GameComponent implements OnInit {
   }
 
   initCards(){
-
     for(let i=0; i<4; i++) {      
-      for(let j=0; j<10; j++)  {                
-        let card: ICardUno  = {figure: j, color: i};
-         this.gamecard.push( card);
-      }
-      for(let j=1; j<10; j++)  {
-        let card: ICardUno  = {figure: j, color: i};
-        this.gamecard.push(card );
-     }
+      this.addCard(0,13,i);
+      this.addCard(1,13,i);
     }
-
-/*    for (let index = 0; index < 108; index++) {};
-
-
-      this.gamecard.push(index);
-    }*/
+    this.addExtraCard(4, this.figureUno.JOKER);
+    this.addExtraCard(4, this.figureUno.PLUS4);
     console.log(' original ', this.gamecard);
+  }
+
+  addCard(start: number, total: number, color: ColorUno) {
+    for(let j=start; j<total; j++)  {                
+      let card: ICardUno  = {figure: j, color: color};
+       this.gamecard.push( card);
+    }
+  }
+
+  addExtraCard(total:number, figure: FigureUno) {
+    for(let j=0; j<total; j++)  {
+      let card: ICardUno  = {figure: figure, color: ColorUno.Black};
+      this.gamecard.push(card );
+   }
   }
 
   shuffleCards() {

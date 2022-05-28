@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ColorUno } from '../Enum/color';
+import { FigureUno } from '../Enum/figure';
 import { ICardUno } from '../Model/carduno';
 
 @Component({
@@ -8,32 +9,37 @@ import { ICardUno } from '../Model/carduno';
   styleUrls: ['./playcard.component.scss']
 })
 export class PlaycardComponent implements OnInit {
-  @Input() card :ICardUno = {figure: 1, color: ColorUno.Black}; // : FigureUno = FigureUno.NUM0;  
+  @Input() card :ICardUno = {figure: 1, color: ColorUno.Black};
   colorUno = ColorUno;
   switchSide = false;
   colors = ["blue", "red", "yellow","green","black"];
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  getCardColor(cardcolor : number, switchSide: boolean) {
-    let cardClass = '';
-    //let catcard = Math.floor(card / 19);
-    cardClass = 'carduno-'+ this.colors[cardcolor];
+  getCardColor(cardcolor : number, switchSide: boolean) {    
+    let cardClass = 'carduno-'+ this.colors[cardcolor];
     cardClass += switchSide ? ' carduno-rotate' : '';
     return cardClass;    
   }
 
   getCardNumber(card: number){
-
+    if(card === FigureUno.PLUS2) {
+      return "+2";
+    } 
+    if(card === FigureUno.INV) {
+      return "I";
+    } 
+    if(card === FigureUno.PASSE) {
+      return "P";
+    } 
+    if(card === FigureUno.JOKER) {
+      return "J";
+    } 
+    if(card === FigureUno.PLUS4) {
+      return "+4";
+    } 
     return card;
-/*    if(card/10) {
-      return (card%9) + 1;
-    } else {
-      return card%10
-    }
-*/
   }
 }

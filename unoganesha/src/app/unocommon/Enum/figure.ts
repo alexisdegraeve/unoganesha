@@ -8,5 +8,11 @@ export enum FigureUno {
     NUM6 = 6,
     NUM7 = 7,
     NUM8 = 8,
-    NUM9= 9
+    NUM9 = 9,
+    PLUS2 =10,
+    INV = 11,
+    PASSE = 12,
+    JOKER = 13,
+    PLUS4 = 14
   }
+  
