@@ -11,6 +11,7 @@ export class PlaycardComponent implements OnInit {
   @Input() card: FigureUno = FigureUno.NUM0;  
   colorUno = ColorUno;
   switchSide = false;
+  colors = ["blue", "red", "yellow","green","black"];
 
   constructor() { }
 
@@ -19,24 +20,12 @@ export class PlaycardComponent implements OnInit {
 
   getCardColor(card : number, switchSide: boolean) {
     let cardClass = '';
-    switch (card % 4) {
-      case 0:
-        cardClass = 'carduno-blue';
-      break;
-      case 1:
-        cardClass ='carduno-red';
-      break;
-      case 2:
-        cardClass ='carduno-yellow';
-      break;      
-      case 3:
-        cardClass ='carduno-green';
-      break;      
-      default:
-        cardClass = 'carduno-black';        
-        break;          
-    }
+    cardClass = 'carduno-'+ this.colors[card%4];
     cardClass += switchSide ? ' carduno-rotate' : '';
     return cardClass;    
+  }
+
+  getCardNumber(card: number){
+    return card%12;
   }
 }
