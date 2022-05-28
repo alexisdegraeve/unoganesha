@@ -8,9 +8,6 @@ import { FigureUno } from 'src/app/unocommon/Enum/figure';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  colorUno: typeof ColorUno = ColorUno;
-  figureUno: typeof FigureUno = FigureUno;
-
   constructor() { }
 
   ngOnInit(): void {

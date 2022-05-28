@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PlaycardComponent } from './playcard/playcard.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -11,13 +12,15 @@ import { PlaycardComponent } from './playcard/playcard.component';
     PlaycardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     PlaycardComponent,
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class UnocommonModule { }

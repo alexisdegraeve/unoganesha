@@ -3,20 +3,12 @@
 
     <div class="card my-4">
         <div class="card-header">
-            <b>Welcome to the Game</b>
+            <h5 class="card-title">UNO GAME</h5>
         </div>
         <div class="card-body">
-            <h5 class="card-title">UNO GAME</h5>
+            <h5 class="card-title">Welcome to the game</h5>
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-lg btn-danger"> START</a>
-
-            <div class="uno-grid">
-                <uno-playcard [color]="colorUno.Yellow" [figure]="figureUno.NUM2"></uno-playcard>
-                <uno-playcard [color]="colorUno.Black" [figure]="figureUno.NUM1"></uno-playcard>
-                <uno-playcard [color]="colorUno.Red" [figure]="figureUno.NUM3"></uno-playcard>
-                <uno-playcard [color]="colorUno.Blue" [figure]="figureUno.NUM5"></uno-playcard>
-
-            </div>
+            <a [routerLink]="'/game'" href="#" class="btn btn-lg btn-danger"> START</a>
         </div>
     </div>
 </div>
