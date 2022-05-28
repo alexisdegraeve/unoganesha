@@ -17,29 +17,26 @@ export class PlaycardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getCardColor(card : number) {
-
+  getCardColor(card : number, switchSide: boolean) {
+    let cardClass = '';
     switch (card % 4) {
       case 0:
-        return 'carduno-blue';
+        cardClass = 'carduno-blue';
       break;
       case 1:
-        return 'carduno-red';
+        cardClass ='carduno-red';
       break;
       case 2:
-        return 'carduno-yellow';
+        cardClass ='carduno-yellow';
       break;      
       case 3:
-        return 'carduno-green';
+        cardClass ='carduno-green';
       break;      
       default:
-        return 'carduno-black';        
-        break;
+        cardClass = 'carduno-black';        
+        break;          
     }
-
-
-
-    
-
+    cardClass += switchSide ? ' carduno-rotate' : '';
+    return cardClass;    
   }
 }
