@@ -1,4 +1,4 @@
-<div class="carduno" (click)="switchSide=!switchSide" [ngClass]="getCardColor(card.color, switchSide)">
+<div class="carduno" (click)="changeSide()" (drop)="dropCard($event)" (dragover)="allowDrop($event)" draggable="true" (dragstart)="dragCard($event)" [ngClass]="getCardColor(card.color, showBackSide)">
     <div class="carduno-front">
         <div class="carduno-inside">
             <div class="uno-number">

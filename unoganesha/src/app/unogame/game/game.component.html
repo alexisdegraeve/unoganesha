@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <div class="uno-grid">
                         <ng-container *ngFor="let card of player1">
-                            <uno-playcard [card]="card"></uno-playcard>
+                            <uno-playcard [card]="card" (putCardEvent)="putCardPlayer1Event($event)"></uno-playcard>
                         </ng-container>
                     </div>
                 </div>
@@ -30,11 +30,13 @@
 
                 <div class="card-body">
                     <div class="uno-grid">
-
+                        <ng-container *ngIf="lastCardTalon()">
+                            <uno-playcard (cardRemoveEvent)="cardRemoveEvent($event)" [card]="lastCardTalon()" (backSideEvent)="backSideTalonEvent($event)" [showBackSide]="showback" (click)="pickCard()"></uno-playcard>
+                        </ng-container>
                     </div>
                 </div>
                 <div class="card-footer">
-                    Your arbitrator
+                    <a type="button" class="btn btn-lg btn-primary" (click)="passCard()"> PASS</a> Your arbitrator
                 </div>
             </div>
         </div>

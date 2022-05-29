@@ -17,6 +17,12 @@ export class GameComponent implements OnInit {
   player1:  Array<ICardUno>=[];
   player2:  Array<ICardUno>=[];
 
+  cardTalon:  Array<ICardUno>=[]; 
+
+  playertoplay = 0;
+  playermax = 2;
+  showback = false;
+    
   constructor() { }
 
   ngOnInit(): void {
@@ -27,9 +33,9 @@ export class GameComponent implements OnInit {
     this.initGame();
     this.shuffleCards();
     this.distributeCard();
-    console.log('cards ', this.gamecard);
-    console.log('player1 ', this.player1);
-    console.log('player2 ', this.player2);
+    this.setTalonCard();
+    
+    this.logCards();
   }
 
   initGame() {
@@ -44,7 +50,7 @@ export class GameComponent implements OnInit {
     }
     this.addExtraCard(4, this.figureUno.JOKER);
     this.addExtraCard(4, this.figureUno.PLUS4);
-    console.log(' original ', this.gamecard);
+    //console.log(' original ', this.gamecard);
   }
 
   addCard(start: number, total: number, color: ColorUno) {
@@ -68,7 +74,7 @@ export class GameComponent implements OnInit {
       this.gamecard[j] = this.gamecard[index];
       this.gamecard[index] = swap;
     }
-    console.log(' shuffle ', this.gamecard);
+    //console.log(' shuffle ', this.gamecard);
   }
 
   distributeCard() {
@@ -77,4 +83,70 @@ export class GameComponent implements OnInit {
     let newArrayPlayer2 = this.gamecard.splice(0, 7);
     this.player2 = newArrayPlayer2;
   }
+
+  setTalonCard() {
+    let lastCard = this.gamecard.pop();    
+    if(lastCard) {
+      this.cardTalon.push(lastCard);
+    }
+  }
+
+  pickCard() {
+    if(this.cardTalon) {
+      //this.player1.push(this.cardTalon);
+      //this.cardTalon = null;
+      //this.setTalonCard();
+      this.showback = false;
+      this.logCards();
+    }    
+  }
+
+  passCard() {
+
+    if(this.playertoplay < (this.playermax - 1)) {
+      this.playertoplay++;    
+    }
+    else {
+      this.playertoplay = 0;
+    }
+    this.  logCards();
+  }
+
+
+  logCards() {
+    console.log('--- logs ---- ' , Date.now.toString());
+    console.log('cards ', this.gamecard);
+    console.log('player1 ', this.player1);
+    console.log('player2 ', this.player2);
+    console.log('playertoplay ', this.playertoplay);
+    console.log('cardTalon ', this.cardTalon);
+  }
+
+  backSideTalonEvent(event: boolean) {
+    this.showback = event;
+  }
+
+  putCardPlayer1Event(selectCard: ICardUno) {
+    console.log('double click');
+    console.log(selectCard);
+  }
+
+  cardRemoveEvent(cardRemove: ICardUno) {
+    console.log('card remove ', cardRemove);
+    let index = this.player1.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color)); 
+    if(cardRemove) {
+      this.cardTalon.push(cardRemove);
+    }    
+    if(index >-1) {
+      this.player1.splice(index, 1);
+    }
+
+    this.logCards();
+
+  }
+
+  lastCardTalon() {
+    return this.cardTalon[this.cardTalon.length -1 ];
+  }
+
 }  

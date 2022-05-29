@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ColorUno } from '../Enum/color';
 import { FigureUno } from '../Enum/figure';
 import { ICardUno } from '../Model/carduno';
@@ -11,10 +11,13 @@ import { ICardUno } from '../Model/carduno';
 export class PlaycardComponent implements OnInit {
   @Input() card :ICardUno = {figure: 1, color: ColorUno.Black};
   colorUno = ColorUno;
-  switchSide = true;
+  @Input() showBackSide = true;
   colors = ["blue", "red", "yellow","green","black"];
   figureUno: typeof FigureUno = FigureUno;  
+  @Output() backSideEvent = new EventEmitter<boolean>();
+  @Output() putCardEvent = new EventEmitter<ICardUno>();
 
+  @Output() cardRemoveEvent = new EventEmitter<ICardUno>();
 
   constructor() { }
 
@@ -44,4 +47,38 @@ export class PlaycardComponent implements OnInit {
     } 
     return card;
   }
+
+  changeSide() {
+    this.showBackSide=!this.showBackSide;
+    this.backSideEvent.emit(this.showBackSide);
+  }
+
+  putCard() {
+    this.putCardEvent.emit(this.card);
+  }
+
+  dragCard(event: any) {
+    let j = JSON.stringify(this.card);
+    event.dataTransfer.setData("card", j);
+    console.log(event);
+  }
+
+  allowDrop(event: any) {
+    event.preventDefault();
+    console.log('allowdrop');
+  }
+
+  
+  dropCard(event: any) { 
+    event.preventDefault();
+    var data = JSON.parse(event.dataTransfer.getData("card")) as ICardUno;
+    console.log(data);
+
+    if ((data.color == this.card.color) || (data.figure == this.card.figure)) {
+      console.log('CARD OK');
+      this.cardRemoveEvent.emit(data);
+    } 
+    /* ev.target.appendChild(document.getElementById(data)); */
+  }
+
 }
