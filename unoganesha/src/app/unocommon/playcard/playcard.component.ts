@@ -74,7 +74,7 @@ export class PlaycardComponent implements OnInit {
     var data = JSON.parse(event.dataTransfer.getData("card")) as ICardUno;
     console.log(data);
 
-    if ((data.color == this.card.color) || (data.figure == this.card.figure)) {
+    if ((data.color == this.card.color) || (data.figure == this.card.figure) || (data.figure == this.figureUno.JOKER) || (data.figure == this.figureUno.PLUS4) ) {
       console.log('CARD OK');
       this.cardRemoveEvent.emit(data);
     } 

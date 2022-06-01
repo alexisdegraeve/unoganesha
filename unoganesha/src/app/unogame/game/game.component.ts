@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ColorUno } from 'src/app/unocommon/Enum/color';
 import { FigureUno } from 'src/app/unocommon/Enum/figure';
 import { ICardUno } from 'src/app/unocommon/Model/carduno';
@@ -6,9 +7,10 @@ import { ICardUno } from 'src/app/unocommon/Model/carduno';
 @Component({
   selector: 'uno-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnChanges {
   colorUno: typeof ColorUno = ColorUno;
   figureUno: typeof FigureUno = FigureUno;  
 
@@ -19,11 +21,20 @@ export class GameComponent implements OnInit {
 
   cardTalon:  Array<ICardUno>=[]; 
 
-  playertoplay = 0;
+  playertoplay: number  = 0;
   playermax = 2;
   showback = false;
+
+
+
     
   constructor() { }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['playertoplay'].currentValue != changes['playertoplay'].previousValue){
+      console.log('change player');
+    }
+  }
 
   ngOnInit(): void {
     
