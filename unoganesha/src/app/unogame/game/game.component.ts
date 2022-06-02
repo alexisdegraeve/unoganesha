@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { BehaviorSubject, Observable, Observer, Subject } from 'rxjs';
+import { BehaviorSubject, last, Observable, Observer, Subject } from 'rxjs';
 import { ColorUno } from 'src/app/unocommon/Enum/color';
 import { FigureUno } from 'src/app/unocommon/Enum/figure';
 import { ICardUno } from 'src/app/unocommon/Model/carduno';
@@ -25,6 +25,7 @@ export class GameComponent implements OnInit {
   playermax = 2;
   showback = false;
   changePlayer = new Subject<number>();
+  changeTalon = new Subject<ICardUno>();
       
   constructor() { }
   
@@ -36,6 +37,25 @@ export class GameComponent implements OnInit {
         }
       }
     );
+    this.changeTalon.subscribe((talon) => {
+      console.log('TALON change : ',talon);
+
+      let plusCard = (talon.figure === FigureUno.PLUS2) ? 2 : 0;
+      if(plusCard==0) {
+        plusCard = (talon.figure === FigureUno.PLUS4)  ?  4 : 0;
+      } 
+
+      if(plusCard) {
+        for (let index = 0; index < plusCard; index++) {
+          if(this.playertoplay==0) {
+            this.takeCardNoChoice(this.player1);
+          } else {
+            this.takeCardNoChoice(this.player2);
+          }          
+        }
+      }
+
+    });
     this.changePlayer.next(this.playertoplay);
   }
 
@@ -98,6 +118,7 @@ export class GameComponent implements OnInit {
     let lastCard = this.gamecard.pop();    
     if(lastCard) {
       this.cardTalon.push(lastCard);
+      this.changeTalon.next(lastCard);
     }
   }
 
@@ -141,6 +162,7 @@ export class GameComponent implements OnInit {
     let index = player.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color)); 
     if(cardRemove) {
       this.cardTalon.push(cardRemove);
+      this.changeTalon.next(cardRemove);
     }    
     if(index >-1) {
       player.splice(index, 1);
