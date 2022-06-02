@@ -112,6 +112,7 @@ export class GameComponent implements OnInit {
   }
 
   passCard() {
+    this.takeCardNoChoice(this.player1);
     this.changeUser();
     this.logCards();
   }
@@ -135,18 +136,28 @@ export class GameComponent implements OnInit {
     console.log(selectCard);
   }
 
-  cardRemoveEvent(cardRemove: ICardUno) {
+  cardRemoveEvent(cardRemove: ICardUno, player: ICardUno[] ) {
     console.log('card remove ', cardRemove);
-    let index = this.player1.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color)); 
+    let index = player.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color)); 
     if(cardRemove) {
       this.cardTalon.push(cardRemove);
     }    
     if(index >-1) {
-      this.player1.splice(index, 1);
+      player.splice(index, 1);
+      if(player == this.player1) {
+        this.changeUser();
+      }
     }
 
     this.logCards();
+  }
 
+  takeCardNoChoice(player: ICardUno[] ) {
+    let removecard = this.gamecard.pop();
+    if(removecard != null) {
+      player.push(removecard);
+    }    
+    this.logCards();
   }
 
   lastCardTalon() {
@@ -163,8 +174,14 @@ export class GameComponent implements OnInit {
 
       if( (cardP2.color == lastcard.color) || (cardP2.figure == lastcard.figure) || (cardP2.figure == this.figureUno.JOKER) || (cardP2.figure == this.figureUno.PLUS4)) {
         selectedcard = cardP2;
+        this.cardRemoveEvent(selectedcard, this.player2);
         break;
       }      
+    }
+
+    if(!selectedcard) {
+      //Pick a card
+      this.takeCardNoChoice(this.player2);
     }
     console.log('find a match with selectedcard ', selectedcard);
     this.changeUser();
