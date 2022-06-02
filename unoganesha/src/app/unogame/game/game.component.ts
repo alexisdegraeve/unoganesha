@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, Subject } from 'rxjs';
 import { ColorUno } from 'src/app/unocommon/Enum/color';
 import { FigureUno } from 'src/app/unocommon/Enum/figure';
 import { ICardUno } from 'src/app/unocommon/Model/carduno';
@@ -10,7 +10,7 @@ import { ICardUno } from 'src/app/unocommon/Model/carduno';
   styleUrls: ['./game.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GameComponent implements OnInit, OnChanges {
+export class GameComponent implements OnInit {
   colorUno: typeof ColorUno = ColorUno;
   figureUno: typeof FigureUno = FigureUno;  
 
@@ -24,20 +24,19 @@ export class GameComponent implements OnInit, OnChanges {
   playertoplay: number  = 0;
   playermax = 2;
   showback = false;
-
-
-
-    
+  changePlayer = new Subject<number>();
+      
   constructor() { }
   
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes['playertoplay'].currentValue != changes['playertoplay'].previousValue){
-      console.log('change player');
-    }
-  }
-
   ngOnInit(): void {
-    
+    this.changePlayer.subscribe((player) => {
+        console.log('player ',player, ' to play')
+        if(player == 1) {
+          this.computerPlay();
+        }
+      }
+    );
+    this.changePlayer.next(this.playertoplay);
   }
 
   startGame(): void {
@@ -113,14 +112,8 @@ export class GameComponent implements OnInit, OnChanges {
   }
 
   passCard() {
-
-    if(this.playertoplay < (this.playermax - 1)) {
-      this.playertoplay++;    
-    }
-    else {
-      this.playertoplay = 0;
-    }
-    this.  logCards();
+    this.changeUser();
+    this.logCards();
   }
 
 
@@ -158,6 +151,34 @@ export class GameComponent implements OnInit, OnChanges {
 
   lastCardTalon() {
     return this.cardTalon[this.cardTalon.length -1 ];
+  }
+
+  computerPlay() {
+    console.log('Computer is playing...');
+
+    let lastcard = this.cardTalon[this.cardTalon.length - 1];
+    let selectedcard = null;
+    for (const cardP2 of this.player2) {
+      console.log('checking my cards' , cardP2);
+
+      if( (cardP2.color == lastcard.color) || (cardP2.figure == lastcard.figure) || (cardP2.figure == this.figureUno.JOKER) || (cardP2.figure == this.figureUno.PLUS4)) {
+        selectedcard = cardP2;
+        break;
+      }      
+    }
+    console.log('find a match with selectedcard ', selectedcard);
+    this.changeUser();
+  }
+
+  changeUser() {
+    if(this.playertoplay < (this.playermax - 1)) {
+      this.playertoplay++;    
+      this.changePlayer.next(this.playertoplay);
+    }
+    else {
+      this.playertoplay = 0;
+      this.changePlayer.next(this.playertoplay);
+    }
   }
 
 }  
