@@ -220,4 +220,9 @@ export class GameComponent implements OnInit {
     }
   }
 
+  colorChoose(color: ColorUno) {
+    console.log(' choose color ', this.colorUno[color]);
+
+  }
+
 }  

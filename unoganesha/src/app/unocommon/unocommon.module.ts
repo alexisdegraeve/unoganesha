@@ -4,12 +4,14 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PlaycardComponent } from './playcard/playcard.component';
 import { RouterModule } from '@angular/router';
+import { PickcolorComponent } from './pickcolor/pickcolor.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    PlaycardComponent
+    PlaycardComponent,
+    PickcolorComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     FooterComponent,
     PlaycardComponent,
+    PickcolorComponent,
     CommonModule,
     RouterModule
   ]

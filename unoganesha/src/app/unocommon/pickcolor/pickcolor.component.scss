@@ -1,0 +1,50 @@
+$card-yellow: #f2dc33;
+$card-green: #71b048;
+$card-blue: #029ad9;
+$card-red: #ed1f21;
+$card-black: #1e1916;
+.color-picker-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px;
+}
+
+.color-picker {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.carduno-four {
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .carduno-row {
+        display: flex;
+        flex-direction: row;
+        height: 50%;
+        a {
+            flex-basis: 50%;
+        }
+        &:nth-child(1n) {
+            a:nth-child(1n) {
+                background-color: $card-green;
+            }
+            a:nth-child(2n) {
+                background-color: $card-yellow;
+            }
+        }
+        &:nth-child(2n) {
+            a:nth-child(1n) {
+                background-color: $card-blue;
+            }
+            a:nth-child(2n) {
+                background-color: $card-red;
+            }
+        }
+    }
+}

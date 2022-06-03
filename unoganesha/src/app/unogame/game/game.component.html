@@ -38,6 +38,10 @@
                 <div class="card-footer">
                     <a type="button" class="btn btn-lg btn-primary" (click)="passCard()"> PASS</a> Your arbitrator
                 </div>
+                <div>
+                    <uno-pickcolor (colorChoose)="colorChoose($event)"></uno-pickcolor>
+                </div>
+
             </div>
         </div>
         <div class="col-5">
