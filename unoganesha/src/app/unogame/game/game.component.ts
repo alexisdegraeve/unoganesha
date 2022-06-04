@@ -12,23 +12,26 @@ import { ICardUno } from 'src/app/unocommon/Model/carduno';
 })
 export class GameComponent implements OnInit {
   colorUno: typeof ColorUno = ColorUno;
-  figureUno: typeof FigureUno = FigureUno;  
+  figureUno: typeof FigureUno = FigureUno;
 
   gamecard: Array<ICardUno>=[];
 
   player1:  Array<ICardUno>=[];
   player2:  Array<ICardUno>=[];
 
-  cardTalon:  Array<ICardUno>=[]; 
+  cardTalon:  Array<ICardUno>=[];
 
   playertoplay: number  = 0;
   playermax = 2;
   showback = false;
   changePlayer = new Subject<number>();
   changeTalon = new Subject<ICardUno>();
-      
+
+  score_player1 = 0;
+  score_player2 = 0;
+
   constructor() { }
-  
+
   ngOnInit(): void {
     this.changePlayer.subscribe((player) => {
         console.log('player ',player, ' to play')
@@ -43,7 +46,7 @@ export class GameComponent implements OnInit {
       let plusCard = (talon.figure === FigureUno.PLUS2) ? 2 : 0;
       if(plusCard==0) {
         plusCard = (talon.figure === FigureUno.PLUS4)  ?  4 : 0;
-      } 
+      }
 
       if(plusCard) {
         for (let index = 0; index < plusCard; index++) {
@@ -51,7 +54,7 @@ export class GameComponent implements OnInit {
             this.takeCardNoChoice(this.player1);
           } else {
             this.takeCardNoChoice(this.player2);
-          }          
+          }
         }
       }
 
@@ -64,17 +67,17 @@ export class GameComponent implements OnInit {
     this.shuffleCards();
     this.distributeCard();
     this.setTalonCard();
-    
+
     this.logCards();
   }
 
   initGame() {
     this.initCards();
-    console.log(this.gamecard.length);    
+    console.log(this.gamecard.length);
   }
 
   initCards(){
-    for(let i=0; i<4; i++) {      
+    for(let i=0; i<4; i++) {
       this.addCard(0,13,i);
       this.addCard(1,13,i);
     }
@@ -84,7 +87,7 @@ export class GameComponent implements OnInit {
   }
 
   addCard(start: number, total: number, color: ColorUno) {
-    for(let j=start; j<total; j++)  {                
+    for(let j=start; j<total; j++)  {
       let card: ICardUno  = {figure: j, color: color};
        this.gamecard.push( card);
     }
@@ -115,7 +118,7 @@ export class GameComponent implements OnInit {
   }
 
   setTalonCard() {
-    let lastCard = this.gamecard.pop();    
+    let lastCard = this.gamecard.pop();
     if(lastCard) {
       this.cardTalon.push(lastCard);
       this.changeTalon.next(lastCard);
@@ -129,7 +132,7 @@ export class GameComponent implements OnInit {
       //this.setTalonCard();
       this.showback = false;
       this.logCards();
-    }    
+    }
   }
 
   passCard() {
@@ -159,14 +162,15 @@ export class GameComponent implements OnInit {
 
   cardRemoveEvent(cardRemove: ICardUno, player: ICardUno[] ) {
     console.log('card remove ', cardRemove);
-    let index = player.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color)); 
+    let index = player.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color));
     if(cardRemove) {
       this.cardTalon.push(cardRemove);
       this.changeTalon.next(cardRemove);
-    }    
+    }
     if(index >-1) {
       player.splice(index, 1);
       if(player == this.player1) {
+        this.changeScore(cardRemove);
         this.changeUser();
       }
     }
@@ -174,11 +178,26 @@ export class GameComponent implements OnInit {
     this.logCards();
   }
 
+  changeScore(card: ICardUno, player1 = true) {
+    if(card.figure < 10) {
+      if(player1) this.score_player1 = this.score_player1  +(+card.figure);
+      if(!player1) this.score_player2 = this.score_player2  +(+card.figure);
+    }
+    if(card.figure == this.figureUno.PLUS2 ||card.figure == this.figureUno.INV || card.figure == this.figureUno.PASSE) {
+      if(player1) this.score_player1 = this.score_player1  + 20;
+      if(!player1) this.score_player2 = this.score_player2  +20;
+    }
+    if(card.figure == this.figureUno.JOKER ||card.figure == this.figureUno.PLUS4) {
+      if(player1) this.score_player1 = this.score_player1  +50;
+      if(!player1) this.score_player2 = this.score_player2  +50;
+    }
+  }
+
   takeCardNoChoice(player: ICardUno[] ) {
     let removecard = this.gamecard.pop();
     if(removecard != null) {
       player.push(removecard);
-    }    
+    }
     this.logCards();
   }
 
@@ -197,8 +216,9 @@ export class GameComponent implements OnInit {
       if( (cardP2.color == lastcard.color) || (cardP2.figure == lastcard.figure) || (cardP2.figure == this.figureUno.JOKER) || (cardP2.figure == this.figureUno.PLUS4)) {
         selectedcard = cardP2;
         this.cardRemoveEvent(selectedcard, this.player2);
+        this.changeScore(selectedcard, false);
         break;
-      }      
+      }
     }
 
     if(!selectedcard) {
@@ -211,7 +231,7 @@ export class GameComponent implements OnInit {
 
   changeUser() {
     if(this.playertoplay < (this.playermax - 1)) {
-      this.playertoplay++;    
+      this.playertoplay++;
       this.changePlayer.next(this.playertoplay);
     }
     else {
@@ -225,4 +245,4 @@ export class GameComponent implements OnInit {
 
   }
 
-}  
+}
