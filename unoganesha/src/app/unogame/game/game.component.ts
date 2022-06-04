@@ -26,6 +26,7 @@ export class GameComponent implements OnInit {
   showback = false;
   changePlayer = new Subject<number>();
   changeTalon = new Subject<ICardUno>();
+  selectColor?: ColorUno;
 
   score_player1 = 0;
   score_player2 = 0;
@@ -46,6 +47,11 @@ export class GameComponent implements OnInit {
       let plusCard = (talon.figure === FigureUno.PLUS2) ? 2 : 0;
       if(plusCard==0) {
         plusCard = (talon.figure === FigureUno.PLUS4)  ?  4 : 0;
+      }
+
+      if(talon.figure === FigureUno.PLUS4 || talon.figure === FigureUno.JOKER) {
+        let nb =   Math.floor(Math.random() * 5);
+        this.selectColor = nb;
       }
 
       if(plusCard) {
@@ -227,6 +233,10 @@ export class GameComponent implements OnInit {
     }
     console.log('find a match with selectedcard ', selectedcard);
     this.changeUser();
+    if(selectedcard && selectedcard.figure == this.figureUno.PASSE) {
+      console.log('the other can pass');
+      this.changeUser();
+    }
   }
 
   changeUser() {
