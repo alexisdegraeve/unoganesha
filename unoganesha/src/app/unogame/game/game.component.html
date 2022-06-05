@@ -42,22 +42,20 @@
         </div>
         <div class="col-3">
             <div class="card">
-                <div class="card-header d-flex">
+                <div class="card-header d-flex align-items-center">
                     <h5 class="card-title">Cards</h5>
-                    <div [class.uno-color-yellow]="selectColor == colorUno.Yellow" [class.uno-color-red]="selectColor == colorUno.Red" [class.uno-color-blue]="selectColor == colorUno.Blue" [class.uno-color-green]="selectColor == colorUno.Green">
-
+                    <div class="ms-auto" [class.uno-color-yellow]="selectColor == colorUno.Yellow" [class.uno-color-red]="selectColor == colorUno.Red" [class.uno-color-blue]="selectColor == colorUno.Blue" [class.uno-color-green]="selectColor == colorUno.Green">
                     </div>
                 </div>
 
-                <div class="card-body">
-                    <div class="uno-grid">
-                        <ng-container *ngIf="lastCardTalon()">
-                            <uno-playcard [colorUnoSelect]="selectColor" (cardRemoveEvent)="cardRemoveEvent($event, this.player1)" [card]="lastCardTalon()" (backSideEvent)="backSideTalonEvent($event)" [showBackSide]="showback" (click)="pickCard()"></uno-playcard>
-                        </ng-container>
+                <div class="card-body d-flex flex-row align-items-center">
+                    <ng-container *ngIf="lastCardTalon()">
+                        <uno-playcard [colorUnoSelect]="selectColor" (cardRemoveEvent)="cardRemoveEvent($event, this.player1)" [card]="lastCardTalon()" (backSideEvent)="backSideTalonEvent($event)" [showBackSide]="showback" (click)="pickCard()"></uno-playcard>
+                    </ng-container>
+                    <div class="mx-4">
+                        Choose your color:
+                        <uno-pickcolor (colorChoose)="colorChoose($event)"></uno-pickcolor>
                     </div>
-                </div>
-                <div>
-                    <uno-pickcolor (colorChoose)="colorChoose($event)"></uno-pickcolor>
                 </div>
             </div>
         </div>
