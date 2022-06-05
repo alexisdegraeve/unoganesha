@@ -35,7 +35,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.changePlayer.subscribe((player) => {
-        console.log('player ',player, ' to play')
+        console.log('player ',player, ' to play');
         if(player == 1) {
           this.computerPlay();
         }
@@ -166,19 +166,48 @@ export class GameComponent implements OnInit {
     console.log(selectCard);
   }
 
-  cardRemoveEvent(cardRemove: ICardUno, player: ICardUno[] ) {
+  cardRemoveEvent(cardRemove: ICardUno, playerCards: ICardUno[] ) {
     console.log('card remove ', cardRemove);
-    let index = player.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color));
+    let index = playerCards.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color));
     if(cardRemove) {
       this.cardTalon.push(cardRemove);
       this.changeTalon.next(cardRemove);
     }
     if(index >-1) {
-      player.splice(index, 1);
-      if(player == this.player1) {
+      playerCards.splice(index, 1);
+
+      if(this.playertoplay == 0) {
         this.changeScore(cardRemove);
-        this.changeUser();
+
+        if(cardRemove.figure == this.figureUno.PASSE) {
+          console.log('Computer can not play');
+          this.changeUser();
+        }
+
+        if(cardRemove.figure == this.figureUno.PLUS2) {
+          console.log('the computer take 2 cards');
+          this.takeCardNoChoice(this.player2);
+          this.takeCardNoChoice(this.player2);
+          this.changeUser();
+        }
       }
+
+      if(this.playertoplay == 1) {
+        this.changeScore(cardRemove);
+
+        if(cardRemove.figure == this.figureUno.PASSE) {
+          console.log('Player 1 can not play');
+          this.changeUser();
+        }
+
+        if(cardRemove.figure == this.figureUno.PLUS2) {
+          console.log('the player 1 take 2 cards');
+          this.takeCardNoChoice(this.player1);
+          this.takeCardNoChoice(this.player1);
+          this.changeUser();
+        }
+      }
+
     }
 
     this.logCards();
@@ -233,21 +262,28 @@ export class GameComponent implements OnInit {
     }
     console.log('find a match with selectedcard ', selectedcard);
     this.changeUser();
-    if(selectedcard && selectedcard.figure == this.figureUno.PASSE) {
-      console.log('the other can pass');
+
+/*    if(selectedcard && selectedcard.figure == this.figureUno.PLUS2) {
+      console.log('the player 1 take 2 cards');
+      this.takeCardNoChoice(this.player1);
+      this.takeCardNoChoice(this.player1);
       this.changeUser();
     }
+
+    if(selectedcard && selectedcard.figure == this.figureUno.PASSE) {
+      console.log('the player 1  can not play');
+      this.changeUser();
+    } */
   }
 
   changeUser() {
     if(this.playertoplay < (this.playermax - 1)) {
       this.playertoplay++;
-      this.changePlayer.next(this.playertoplay);
     }
     else {
       this.playertoplay = 0;
-      this.changePlayer.next(this.playertoplay);
     }
+    this.changePlayer.next(this.playertoplay);
   }
 
   colorChoose(color: ColorUno) {

@@ -13,7 +13,7 @@ export class PlaycardComponent implements OnInit {
   colorUno = ColorUno;
   @Input() showBackSide = true;
   colors = ["blue", "red", "yellow","green","black"];
-  figureUno: typeof FigureUno = FigureUno;  
+  figureUno: typeof FigureUno = FigureUno;
   @Output() backSideEvent = new EventEmitter<boolean>();
   @Output() putCardEvent = new EventEmitter<ICardUno>();
 
@@ -23,28 +23,28 @@ export class PlaycardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getCardColor(cardcolor : number, switchSide: boolean) {    
+  getCardColor(cardcolor : number, switchSide: boolean) {
     let cardClass = 'carduno-'+ this.colors[cardcolor];
     cardClass += switchSide ? ' carduno-rotate' : '';
-    return cardClass;    
+    return cardClass;
   }
 
   getCardNumber(card: number){
     if(card === FigureUno.PLUS2) {
       return "+2";
-    } 
+    }
     if(card === FigureUno.INV) {
       return "I";
-    } 
+    }
     if(card === FigureUno.PASSE) {
       return "P";
-    } 
+    }
     if(card === FigureUno.JOKER) {
       return "J";
-    } 
+    }
     if(card === FigureUno.PLUS4) {
       return "+4";
-    } 
+    }
     return card;
   }
 
@@ -68,16 +68,16 @@ export class PlaycardComponent implements OnInit {
     console.log('allowdrop');
   }
 
-  
-  dropCard(event: any) { 
+
+  dropCard(event: any) {
     event.preventDefault();
     var data = JSON.parse(event.dataTransfer.getData("card")) as ICardUno;
     console.log(data);
 
-    if ((data.color == this.card.color) || (data.figure == this.card.figure) || (data.figure == this.figureUno.JOKER) || (data.figure == this.figureUno.PLUS4) ) {
+    if ((data.color == this.card.color) || (data.figure == this.card.figure) || (data.figure == this.figureUno.JOKER) || (data.figure == this.figureUno.PLUS4)) {
       console.log('CARD OK');
       this.cardRemoveEvent.emit(data);
-    } 
+    }
     /* ev.target.appendChild(document.getElementById(data)); */
   }
 
