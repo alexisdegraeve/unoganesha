@@ -79,6 +79,10 @@ export class PlaycardComponent implements OnInit {
       console.log('CARD OK');
       this.cardRemoveEvent.emit(data);
     }else {
+      console.log('CHECK JOKER ');
+      console.log(this.colorUnoSelect);
+      console.log(data);
+      console.log(this.figureUno);
       if (this.card.figure == this.figureUno.JOKER &&  this.colorUnoSelect == data.color) {
         console.log('OK JOKER');
         console.log(this.colorUnoSelect);

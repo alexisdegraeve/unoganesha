@@ -11,12 +11,13 @@
                 <div class="card-body  p-0">
                     <div class="uno-grid">
                         <ng-container *ngFor="let card of player1">
-                            <uno-playcard [card]="card" (putCardEvent)="putCardPlayer1Event($event)"></uno-playcard>
+                            <uno-playcard [colorUnoSelect]="selectColor" [card]="card" (putCardEvent)="putCardPlayer1Event($event)"></uno-playcard>
                         </ng-container>
                     </div>
                 </div>
                 <div class="card-footer  bg-transparent d-flex align-items-center">
                     <a type="button" class="btn btn-outline-primary mx-2" (click)="startGame()"> START</a>
+                    <a type="button" class="btn btn-outline-warning" (click)="sayUno()" *ngIf="player1.length==1"> UNO</a>
                     <a type="button" class="btn btn-outline-success" (click)="passCardFromHuman()"> PASS</a>
                     <div class="ms-auto  text-primary"> Score : {{score_player1}}</div>
                 </div>

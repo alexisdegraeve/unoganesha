@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { BehaviorSubject, last, Observable, Observer, Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { ColorUno } from 'src/app/unocommon/Enum/color';
 import { FigureUno } from 'src/app/unocommon/Enum/figure';
 import { ICardUno } from 'src/app/unocommon/Model/carduno';
@@ -25,6 +25,8 @@ export class GameComponent implements OnInit {
   changePlayer = new Subject<boolean>();
   changeTalon = new Subject<ICardUno>();
   selectColor?: ColorUno;
+
+  isSayuno = false;
 
   score_player1 = 0;
   score_player2 = 0;
@@ -174,12 +176,21 @@ export class GameComponent implements OnInit {
       this.cardTalon.push(cardRemove);
       this.changeTalon.next(cardRemove);
     }
+
     if(index >-1) {
       console.log('ICI index');
       playerCards.splice(index, 1);
 
       if(this.realplayer) {
         this.changeScore(cardRemove);
+
+        if(playerCards.length==1 ) {
+          if(this.isSayuno){
+            console.log('GAGNE ! Player 1');
+          } else {
+            this.takeCardNoChoice(this.player1);
+          }
+        }
 
         if(cardRemove.figure == this.figureUno.PASSE) {
           console.log('Computer can not play');
@@ -313,4 +324,7 @@ export class GameComponent implements OnInit {
     this.selectColor = color;
   }
 
+  sayUno() {
+    this.isSayuno = true;
+  }
 }
