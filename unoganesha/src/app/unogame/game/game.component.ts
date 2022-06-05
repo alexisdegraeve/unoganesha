@@ -7,8 +7,7 @@ import { ICardUno } from 'src/app/unocommon/Model/carduno';
 @Component({
   selector: 'uno-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
   colorUno: typeof ColorUno = ColorUno;
@@ -20,11 +19,10 @@ export class GameComponent implements OnInit {
   player2:  Array<ICardUno>=[];
 
   cardTalon:  Array<ICardUno>=[];
+  realplayer = true;
 
-  playertoplay: number  = 0;
-  playermax = 2;
   showback = false;
-  changePlayer = new Subject<number>();
+  changePlayer = new Subject<boolean>();
   changeTalon = new Subject<ICardUno>();
   selectColor?: ColorUno;
 
@@ -34,9 +32,10 @@ export class GameComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.changePlayer.subscribe((player) => {
-        console.log('player ',player, ' to play');
-        if(player == 1) {
+    this.changePlayer.subscribe((realplayer) => {
+        if(realplayer) console.log('human to play');
+        if(!realplayer) console.log('computer to play');
+        if(!realplayer) {
           this.computerPlay();
         }
       }
@@ -54,18 +53,18 @@ export class GameComponent implements OnInit {
         this.selectColor = nb;
       }
 
-      if(plusCard) {
+      /*if(plusCard) {
         for (let index = 0; index < plusCard; index++) {
-          if(this.playertoplay==0) {
+          if(this.realplayer) {
             this.takeCardNoChoice(this.player1);
           } else {
             this.takeCardNoChoice(this.player2);
           }
         }
-      }
+      }*/
 
     });
-    this.changePlayer.next(this.playertoplay);
+    this.changePlayer.next(this.realplayer);
   }
 
   startGame(): void {
@@ -141,9 +140,9 @@ export class GameComponent implements OnInit {
     }
   }
 
-  passCard() {
+  passCardFromHuman() {
     this.takeCardNoChoice(this.player1);
-    this.changeUser();
+    this.changeUser(false);
     this.logCards();
   }
 
@@ -153,7 +152,7 @@ export class GameComponent implements OnInit {
     console.log('cards ', this.gamecard);
     console.log('player1 ', this.player1);
     console.log('player2 ', this.player2);
-    console.log('playertoplay ', this.playertoplay);
+    console.log('human to play: ', this.realplayer);
     console.log('cardTalon ', this.cardTalon);
   }
 
@@ -174,37 +173,62 @@ export class GameComponent implements OnInit {
       this.changeTalon.next(cardRemove);
     }
     if(index >-1) {
+      console.log('ICI index');
       playerCards.splice(index, 1);
 
-      if(this.playertoplay == 0) {
+      if(this.realplayer) {
         this.changeScore(cardRemove);
 
         if(cardRemove.figure == this.figureUno.PASSE) {
           console.log('Computer can not play');
-          this.changeUser();
         }
 
         if(cardRemove.figure == this.figureUno.PLUS2) {
           console.log('the computer take 2 cards');
           this.takeCardNoChoice(this.player2);
           this.takeCardNoChoice(this.player2);
-          this.changeUser();
+        }
+
+        if(cardRemove.figure == this.figureUno.PLUS4) {
+          console.log('the computer take 4 cards');
+          this.takeCardNoChoice(this.player2);
+          this.takeCardNoChoice(this.player2);
+          this.takeCardNoChoice(this.player2);
+          this.takeCardNoChoice(this.player2);
+        }
+
+        if(cardRemove.figure == this.figureUno.PLUS2 || cardRemove.figure == this.figureUno.PLUS4 || cardRemove.figure == this.figureUno.PASSE) {
+          this.changeUser(true);
+        } else {
+          this.changeUser(false);
         }
       }
 
-      if(this.playertoplay == 1) {
+      if(!this.realplayer) {
         this.changeScore(cardRemove);
 
         if(cardRemove.figure == this.figureUno.PASSE) {
           console.log('Player 1 can not play');
-          this.changeUser();
         }
 
         if(cardRemove.figure == this.figureUno.PLUS2) {
-          console.log('the player 1 take 2 cards');
+          console.log('the player 1 can not play and take 2 cards');
           this.takeCardNoChoice(this.player1);
           this.takeCardNoChoice(this.player1);
-          this.changeUser();
+        }
+
+        if(cardRemove.figure == this.figureUno.PLUS4) {
+          console.log('the human take 4 cards');
+          this.takeCardNoChoice(this.player1);
+          this.takeCardNoChoice(this.player1);
+          this.takeCardNoChoice(this.player1);
+          this.takeCardNoChoice(this.player1);
+        }
+
+        if(cardRemove.figure == this.figureUno.PLUS2 || cardRemove.figure == this.figureUno.PLUS4 || cardRemove.figure == this.figureUno.PASSE) {
+          this.changeUser(false);
+        } else {
+          this.changeUser(true);
         }
       }
 
@@ -259,12 +283,9 @@ export class GameComponent implements OnInit {
     if(!selectedcard) {
       //Pick a card
       this.takeCardNoChoice(this.player2);
+      this.changeUser(true);
     }
     console.log('find a match with selectedcard ', selectedcard);
-
-    setInterval(()=>{
-      this.changeUser();
-    }, 4000)
 
 
 /*    if(selectedcard && selectedcard.figure == this.figureUno.PLUS2) {
@@ -280,19 +301,14 @@ export class GameComponent implements OnInit {
     } */
   }
 
-  changeUser() {
-    if(this.playertoplay < (this.playermax - 1)) {
-      this.playertoplay++;
-    }
-    else {
-      this.playertoplay = 0;
-    }
-    this.changePlayer.next(this.playertoplay);
+  changeUser(next:boolean) {
+    this.realplayer = next;
+    this.changePlayer.next(this.realplayer);
   }
 
   colorChoose(color: ColorUno) {
     console.log(' choose color ', this.colorUno[color]);
-
+    this.selectColor = color;
   }
 
 }

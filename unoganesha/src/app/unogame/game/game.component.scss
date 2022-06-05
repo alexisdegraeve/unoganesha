@@ -1,8 +1,41 @@
+$card-yellow: #f2dc33;
+$card-green: #71b048;
+$card-blue: #029ad9;
+$card-red: #ed1f21;
+$card-black: #1e1916;
 .uno-grid {
     display: flex;
     flex-wrap: nowrap;
+    justify-content: center;
     width: 100%;
     gap: 30px;
     overflow-x: auto;
     padding: 24px;
+}
+
+@mixin uno-color($color) {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background-color: $color;
+}
+
+.uno-color-black {
+    @include uno-color($card-black);
+}
+
+.uno-color-yellow {
+    @include uno-color($card-yellow);
+}
+
+.uno-color-blue {
+    @include uno-color($card-blue);
+}
+
+.uno-color-green {
+    @include uno-color($card-green);
+}
+
+.uno-color-red {
+    @include uno-color($card-red);
 }

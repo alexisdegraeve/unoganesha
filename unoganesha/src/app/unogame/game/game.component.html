@@ -4,9 +4,9 @@
 
     <div class="row mt-4">
         <div class="col-9">
-            <div class="card" [class.border-primary]="playertoplay==0">
+            <div class="card" [class.border-primary]="realplayer">
                 <div class="card-header  bg-transparent">
-                    <h5 class="card-title  text-primary">Ready Player One ? (Human) <i class="bi bi-person-circle"></i></h5>
+                    <h5 class="card-title  text-primary">Ready Player One ? <i class="fab fa-twitter"></i></h5>
                 </div>
                 <div class="card-body  p-0">
                     <div class="uno-grid">
@@ -17,14 +17,14 @@
                 </div>
                 <div class="card-footer  bg-transparent d-flex align-items-center">
                     <a type="button" class="btn btn-outline-primary mx-2" (click)="startGame()"> START</a>
-                    <a type="button" class="btn btn-outline-danger" (click)="passCard()"> PASS</a>
+                    <a type="button" class="btn btn-outline-success" (click)="passCardFromHuman()"> PASS</a>
                     <div class="ms-auto  text-primary"> Score : {{score_player1}}</div>
                 </div>
             </div>
 
-            <div class="card mt-4" [class.border-danger]="playertoplay==1">
+            <div class="card mt-4" [class.border-danger]="!realplayer">
                 <div class="card-header  bg-transparent">
-                    <h5 class="card-title text-danger">Player Two <i class="bi bi-person-circle"></i></h5>
+                    <h5 class="card-title text-danger">Player Two <i class="fa fa-meh-o"></i></h5>
                 </div>
                 <div class="card-body p-0">
                     <div class="uno-grid">
@@ -41,9 +41,11 @@
         </div>
         <div class="col-3">
             <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Arbitrator</h5>
-                    {{ selectColor }}
+                <div class="card-header d-flex">
+                    <h5 class="card-title">Cards</h5>
+                    <div [class.uno-color-yellow]="selectColor == colorUno.Yellow" [class.uno-color-red]="selectColor == colorUno.Red" [class.uno-color-blue]="selectColor == colorUno.Blue" [class.uno-color-green]="selectColor == colorUno.Green">
+
+                    </div>
                 </div>
 
                 <div class="card-body">

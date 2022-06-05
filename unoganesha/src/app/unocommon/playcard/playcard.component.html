@@ -1,5 +1,5 @@
-<div class="carduno" (click)="changeSide()" (drop)="dropCard($event)" (dragover)="allowDrop($event)" draggable="true" (dragstart)="dragCard($event)" [ngClass]="getCardColor(card.color, showBackSide)">
-    <div class="carduno-front">
+<div class="carduno" (click)="changeSide()" (drop)="dropCard($event)" (dragover)="allowDrop($event)" draggable="true" (dragstart)="dragCard($event)" [class.carduno-rotate]="showBackSide">
+    <div class="carduno-front" [ngClass]="getCardColor(card.color)">
         <div class="carduno-inside">
             <div class="uno-number">
 
@@ -84,12 +84,12 @@
         </div>
     </div>
 
-    <div class="carduno-back ">
+    <div class="carduno-back carduno-black">
         <div class="carduno-inside ">
             <div class="carduno-logo ">
 
                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="308.000000pt" height="383.000000pt" viewBox="0 0 308.000000 383.000000" preserveAspectRatio="xMidYMid meet">
-               
+
                <g transform="translate(0.000000,383.000000) scale(0.100000,-0.100000)" stroke="none">
                <path d="M1359 3740 c-36 -19 -89 -73 -89 -91 0 -15 29 -10 70 13 43 25 61 18
                40 -15 -62 -98 -71 -117 -72 -150 -2 -70 60 -122 160 -134 40 -4 60 -1 106 20
