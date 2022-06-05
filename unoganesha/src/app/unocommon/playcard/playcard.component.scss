@@ -28,8 +28,8 @@ $card-black: #1e1916;
     position: relative;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    height: 14rem;
-    width: 11rem;
+    height: 12.5rem;
+    width: 9rem;
     border-radius: 8px;
     box-shadow: 5px 5px 10px;
     .carduno-inside {
@@ -262,9 +262,11 @@ $card-black: #1e1916;
     }
 }
 
+
+/*
 @media (min-width: 85rem) {
     .carduno {
         height: 15rem;
         width: 12rem
     }
-}
+}*/

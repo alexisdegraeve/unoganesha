@@ -261,7 +261,11 @@ export class GameComponent implements OnInit {
       this.takeCardNoChoice(this.player2);
     }
     console.log('find a match with selectedcard ', selectedcard);
-    this.changeUser();
+
+    setInterval(()=>{
+      this.changeUser();
+    }, 4000)
+
 
 /*    if(selectedcard && selectedcard.figure == this.figureUno.PLUS2) {
       console.log('the player 1 take 2 cards');
