@@ -51,6 +51,8 @@ export class GameComponent implements OnInit {
       if(talon.figure === FigureUno.PLUS4 || talon.figure === FigureUno.JOKER) {
         let nb =   Math.floor(Math.random() * 5);
         this.selectColor = nb;
+        console.log('change color auto');
+        console.log(this.selectColor);
       }
 
       /*if(plusCard) {

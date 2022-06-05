@@ -51,7 +51,7 @@
                 <div class="card-body">
                     <div class="uno-grid">
                         <ng-container *ngIf="lastCardTalon()">
-                            <uno-playcard (cardRemoveEvent)="cardRemoveEvent($event, this.player1)" [card]="lastCardTalon()" (backSideEvent)="backSideTalonEvent($event)" [showBackSide]="showback" (click)="pickCard()"></uno-playcard>
+                            <uno-playcard [colorUnoSelect]="selectColor" (cardRemoveEvent)="cardRemoveEvent($event, this.player1)" [card]="lastCardTalon()" (backSideEvent)="backSideTalonEvent($event)" [showBackSide]="showback" (click)="pickCard()"></uno-playcard>
                         </ng-container>
                     </div>
                 </div>
