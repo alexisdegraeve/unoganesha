@@ -43,36 +43,7 @@ export class GameComponent implements OnInit {
         }
       }
     );
-    this.changeTalon.subscribe((talon) => {
-      console.log('TALON change : ',talon);
-
-      let plusCard = (talon.figure === FigureUno.PLUS2) ? 2 : 0;
-      if(plusCard==0) {
-        plusCard = (talon.figure === FigureUno.PLUS4)  ?  4 : 0;
-      }
-
-      if(talon.figure === FigureUno.PLUS4 || talon.figure === FigureUno.JOKER) {
-        this.randomColor();
-        console.log('change color auto');
-        console.log(this.selectColor);
-        console.log('select color random ', this.selectColor);
-      } else {
-        this.selectColor = talon.color;
-        console.log('select color ', this.selectColor);
-      }
-
-      /*if(plusCard) {
-        for (let index = 0; index < plusCard; index++) {
-          if(this.realplayer) {
-            this.takeCardNoChoice(this.player1);
-          } else {
-            this.takeCardNoChoice(this.player2);
-          }
-        }
-      }*/
-
-    });
-    this.changePlayer.next(this.realplayer);
+    //this.changePlayer.next(this.realplayer);
   }
 
   startGame(): void {
@@ -80,7 +51,7 @@ export class GameComponent implements OnInit {
     this.shuffleCards();
     this.distributeCard();
     this.setTalonCard();
-
+    this.firstTimeNoPlayer();
     this.logCards();
   }
 
@@ -156,12 +127,12 @@ export class GameComponent implements OnInit {
 
 
   logCards() {
-    console.log('--- logs ---- ' , Date.now.toString());
+    /* console.log('--- logs ---- ' , Date.now.toString());
     console.log('cards ', this.gamecard);
     console.log('player1 ', this.player1);
     console.log('player2 ', this.player2);
     console.log('human to play: ', this.realplayer);
-    console.log('cardTalon ', this.cardTalon);
+    console.log('cardTalon ', this.cardTalon); */
   }
 
   backSideTalonEvent(event: boolean) {
@@ -219,15 +190,16 @@ export class GameComponent implements OnInit {
           this.takeCardNoChoice(this.player2);
         }
 
-        if(cardRemove.figure == this.figureUno.PLUS2 || cardRemove.figure == this.figureUno.PLUS4 || cardRemove.figure == this.figureUno.PASSE) {
-          this.changeUser(true);
-        } else {
+        if(cardRemove && !(cardRemove.figure == this.figureUno.PLUS2 || cardRemove.figure == this.figureUno.PLUS4 || cardRemove.figure == this.figureUno.PASSE)) {
           this.changeUser(false);
         }
+
+
       }
 
       if(!this.realplayer) {
-        this.changeScore(cardRemove);
+          console.log('computer play --')
+        this.changeScore(cardRemove, false);
 
         if(cardRemove.figure == this.figureUno.PASSE) {
           console.log('Player 1 can not play');
@@ -240,6 +212,7 @@ export class GameComponent implements OnInit {
         }
 
         if(cardRemove.figure == this.figureUno.PLUS4) {
+          console.log('computer play PLUS 4--')
           console.log('the human take 4 cards');
           this.randomColor();
           this.takeCardNoChoice(this.player1);
@@ -252,11 +225,6 @@ export class GameComponent implements OnInit {
           this.randomColor();
         }
 
-        if(cardRemove.figure == this.figureUno.PLUS2 || cardRemove.figure == this.figureUno.PLUS4 || cardRemove.figure == this.figureUno.PASSE) {
-          this.changeUser(false);
-        } else {
-          this.changeUser(true);
-        }
       }
 
     }
@@ -308,21 +276,34 @@ export class GameComponent implements OnInit {
     let lastcard = this.cardTalon[this.cardTalon.length - 1];
     let selectedcard = null;
     for (const cardP2 of this.player2) {
-      console.log('checking my cards' , cardP2);
+      //console.log('checking my cards' , cardP2);
 
-      if( (cardP2.color == lastcard.color) || (cardP2.figure == lastcard.figure) || (cardP2.figure == this.figureUno.JOKER) || (cardP2.figure == this.figureUno.PLUS4)) {
+      if( (cardP2.color == lastcard.color) || (cardP2.figure == lastcard.figure) || (cardP2.figure == this.figureUno.JOKER) || (cardP2.figure == this.figureUno.PLUS4)
+          || ( (cardP2.color == this.selectColor) && (lastcard.figure == this.figureUno.JOKER))
+          || ( (cardP2.color == this.selectColor) && (lastcard.figure == this.figureUno.PLUS4))
+        ) {
         selectedcard = cardP2;
         selectedcard.showBack = false;
-        // await this.delay(5);
-        // console.log('continue');
+        await this.delay(5);
+        console.log('continue');
         this.cardRemoveEvent(selectedcard, this.player2);
         this.changeScore(selectedcard, false);
         break;
       }
     }
 
+
+    if(selectedcard && !(selectedcard.figure == this.figureUno.PLUS2 || selectedcard.figure == this.figureUno.PLUS4 || selectedcard.figure == this.figureUno.PASSE)) {
+      this.changeUser(true);
+    }
+
+    /* else {
+      this.changeUser(false);
+    } */
+
     if(!selectedcard) {
       //Pick a card
+      console.log('no car selected and change user');
       this.takeCardNoChoice(this.player2);
       this.changeUser(true);
     }
@@ -358,7 +339,24 @@ export class GameComponent implements OnInit {
   }
 
   randomColor() {
-    let nb =   Math.floor(Math.random() * 5);
+    let nb =   Math.floor(Math.random() * 4);
     this.selectColor = nb;
+  }
+
+  firstTimeNoPlayer() {
+    let lastCard = this.lastCardTalon();
+    if(lastCard) {
+      if(lastCard.figure === FigureUno.PLUS4 || lastCard.figure === FigureUno.JOKER) {
+        this.randomColor();
+        console.log('change color auto');
+        console.log(this.selectColor);
+        console.log('select color random ', this.selectColor);
+      } else {
+        this.selectColor = lastCard.color;
+        console.log('select color ', this.selectColor);
+      }
+    }
+
+
   }
 }
