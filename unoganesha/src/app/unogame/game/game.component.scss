@@ -39,3 +39,29 @@ $card-black: #1e1916;
 .uno-color-red {
     @include uno-color($card-red);
 }
+
+.uno-shadow-select {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.uno-avatar {
+    background-color: red;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 2rem;
+}
+
+.uno-score {
+    font-size: 20px;
+    font-weight: bold;
+    -webkit-text-stroke-width: 0.05rem;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.54);
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 2px rgb(0 0 0 / 80%);
+}

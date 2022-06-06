@@ -4,9 +4,11 @@
 
     <div class="row mt-4">
         <div class="col-9">
-            <div class="card" [class.border-primary]="realplayer">
-                <div class="card-header  bg-transparent">
-                    <h5 class="card-title  text-primary">Ready Player One ? <i class="fab fa-twitter"></i></h5>
+            <div class="card border-0" [class.uno-shadow-select]="realplayer">
+                <div class="card-header border-0  bg-transparent d-flex align-items-center">
+                    <div class="uno-avatar"><i class="fa fa-grin-alt"></i></div>
+                    <h5 class="ms-4 card-title  text-primary">Ready Player One ?</h5>
+                    <div class="ms-auto uno-score"> Score : {{score_player1}}</div>
                 </div>
                 <div class="card-body  p-0">
                     <div class="uno-grid">
@@ -15,17 +17,18 @@
                         </ng-container>
                     </div>
                 </div>
-                <div class="card-footer  bg-transparent d-flex align-items-center">
+                <div class="card-footer  border-0 bg-transparent d-flex align-items-center">
                     <a type="button" class="btn btn-outline-primary mx-2" (click)="startGame()"> START</a>
                     <a type="button" class="btn btn-outline-warning" (click)="sayUno()" *ngIf="player1.length==1"> UNO</a>
                     <a type="button" class="btn btn-outline-success" (click)="passCardFromHuman()"> PASS</a>
-                    <div class="ms-auto  text-primary"> Score : {{score_player1}}</div>
                 </div>
             </div>
 
-            <div class="card mt-4" [class.border-danger]="!realplayer">
-                <div class="card-header  bg-transparent">
-                    <h5 class="card-title text-danger">Player Two <i class="fa fa-meh-o"></i></h5>
+            <div class="card  border-0 mt-4" [class.uno-shadow-select]="!realplayer">
+                <div class="card-header border-0  bg-transparent  d-flex align-items-center">
+                    <div class="uno-avatar"><i class="fa fa-user-astronaut"></i></div>
+                    <h5 class="ms-4 card-title text-danger">Player Two </h5>
+                    <div class="ms-auto uno-score"> Score : {{score_player2}}</div>
                 </div>
                 <div class="card-body p-0">
                     <div class="uno-grid">
@@ -33,9 +36,6 @@
                             <uno-playcard [card]="card"></uno-playcard>
                         </ng-container>
                     </div>
-                </div>
-                <div class="card-footer  bg-transparent d-flex align-items-center">
-                    <div class="ms-auto  text-danger"> Score : {{score_player2}}</div>
                 </div>
             </div>
 
