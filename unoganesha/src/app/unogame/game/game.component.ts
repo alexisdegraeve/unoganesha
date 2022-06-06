@@ -55,8 +55,10 @@ export class GameComponent implements OnInit {
         this.randomColor();
         console.log('change color auto');
         console.log(this.selectColor);
+        console.log('select color random ', this.selectColor);
       } else {
         this.selectColor = talon.color;
+        console.log('select color ', this.selectColor);
       }
 
       /*if(plusCard) {

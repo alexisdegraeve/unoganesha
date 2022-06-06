@@ -12,8 +12,10 @@ export class PlaycardComponent implements OnInit {
   @Input() card :ICardUno = {figure: 1, color: ColorUno.Black};
   @Input() colorUnoSelect ?: ColorUno;
   @Input() showBackSide = true;
-  colors = ["blue", "red", "yellow","green","black"];
+  //colors = ["blue", "red", "yellow","green","black"];
   figureUno: typeof FigureUno = FigureUno;
+  colorUno :  typeof ColorUno = ColorUno;
+
   @Output() backSideEvent = new EventEmitter<boolean>();
   @Output() putCardEvent = new EventEmitter<ICardUno>();
 
@@ -25,7 +27,9 @@ export class PlaycardComponent implements OnInit {
   ngOnInit(): void {}
 
   getCardColor(cardcolor : number) {
-    let cardClass = 'carduno-'+ this.colors[cardcolor];
+    console.log(cardcolor);
+    console.log(this.colorUno[cardcolor]);
+    let cardClass = 'carduno-'+ this.colorUno[cardcolor].toLowerCase();
 //    cardClass += switchSide ? ' carduno-rotate' : '';
     return cardClass;
   }
