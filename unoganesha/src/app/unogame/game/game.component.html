@@ -33,7 +33,7 @@
                 <div class="card-body p-0">
                     <div class="uno-grid">
                         <ng-container *ngFor="let card of player2">
-                            <uno-playcard [card]="card"></uno-playcard>
+                            <uno-playcard [card]="card" [showBackSide]="card.showBack"></uno-playcard>
                         </ng-container>
                     </div>
                 </div>

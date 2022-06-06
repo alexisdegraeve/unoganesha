@@ -3,5 +3,6 @@ import { FigureUno } from "../Enum/figure"
 
 export interface ICardUno {
     figure: FigureUno,
-    color: ColorUno
+    color: ColorUno,
+    showBack: boolean;
 }

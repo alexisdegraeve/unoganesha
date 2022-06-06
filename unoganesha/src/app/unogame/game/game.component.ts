@@ -101,14 +101,14 @@ export class GameComponent implements OnInit {
 
   addCard(start: number, total: number, color: ColorUno) {
     for(let j=start; j<total; j++)  {
-      let card: ICardUno  = {figure: j, color: color};
+      let card: ICardUno  = {figure: j, color: color,  showBack: true};
        this.gamecard.push( card);
     }
   }
 
   addExtraCard(total:number, figure: FigureUno) {
     for(let j=0; j<total; j++)  {
-      let card: ICardUno  = {figure: figure, color: ColorUno.Black};
+      let card: ICardUno  = {figure: figure, color: ColorUno.Black,  showBack: true};
       this.gamecard.push(card );
    }
   }
@@ -291,7 +291,18 @@ export class GameComponent implements OnInit {
     return this.cardTalon[this.cardTalon.length -1 ];
   }
 
-  computerPlay() {
+  computerFlipCard() {
+
+  }
+
+  delay(n:number){
+    return new Promise(function(resolve){
+        setTimeout(resolve,n*1000);
+    });
+  }
+
+
+  async computerPlay() {
     console.log('Computer is playing...');
 
     let lastcard = this.cardTalon[this.cardTalon.length - 1];
@@ -301,6 +312,9 @@ export class GameComponent implements OnInit {
 
       if( (cardP2.color == lastcard.color) || (cardP2.figure == lastcard.figure) || (cardP2.figure == this.figureUno.JOKER) || (cardP2.figure == this.figureUno.PLUS4)) {
         selectedcard = cardP2;
+        selectedcard.showBack = false;
+        // await this.delay(5);
+        // console.log('continue');
         this.cardRemoveEvent(selectedcard, this.player2);
         this.changeScore(selectedcard, false);
         break;

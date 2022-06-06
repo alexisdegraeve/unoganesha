@@ -9,7 +9,7 @@ import { ICardUno } from '../Model/carduno';
   styleUrls: ['./playcard.component.scss']
 })
 export class PlaycardComponent implements OnInit {
-  @Input() card :ICardUno = {figure: 1, color: ColorUno.Black};
+  @Input() card :ICardUno = {figure: 1, color: ColorUno.Black, showBack: true};
   @Input() colorUnoSelect ?: ColorUno;
   @Input() showBackSide = true;
   //colors = ["blue", "red", "yellow","green","black"];
