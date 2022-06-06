@@ -1,14 +1,24 @@
-<div class="color-picker-container">
-    <div class="color-picker">
-        <div class="carduno-four">
-            <div class="carduno-row">
-                <a type="button" (click)="setColor(colorUno.Green)"></a>
-                <a type="button" (click)="setColor(colorUno.Yellow)"></a>
-            </div>
-            <div class="carduno-row">
-                <a type="button" (click)="setColor(colorUno.Blue)"></a>
-                <a type="button" (click)="setColor(colorUno.Red)"></a>
+<!-- The Modal -->
+<div id="myModal" class="modal" [class.d-block]="showPicker">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+
+        Choose your color:
+        <div class="color-picker-container">
+            <div class="color-picker">
+                <div class="carduno-four">
+                    <div class="carduno-row">
+                        <a type="button" (click)="setColor(colorUno.Green)"></a>
+                        <a type="button" (click)="setColor(colorUno.Yellow)"></a>
+                    </div>
+                    <div class="carduno-row">
+                        <a type="button" (click)="setColor(colorUno.Blue)"></a>
+                        <a type="button" (click)="setColor(colorUno.Red)"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 </div>

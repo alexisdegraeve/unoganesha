@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ColorUno } from '../Enum/color';
 
 @Component({
@@ -8,6 +8,7 @@ import { ColorUno } from '../Enum/color';
 })
 export class PickcolorComponent implements OnInit {
   @Output() colorChoose = new EventEmitter<ColorUno>();
+  @Input() showPicker = false;
   colorUno: typeof ColorUno = ColorUno;
 
   constructor() { }

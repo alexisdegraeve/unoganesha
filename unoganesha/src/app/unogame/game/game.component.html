@@ -52,9 +52,9 @@
                     <ng-container *ngIf="lastCardTalon()">
                         <uno-playcard [colorUnoSelect]="selectColor" (cardRemoveEvent)="cardRemoveEvent($event, this.player1)" [card]="lastCardTalon()" (backSideEvent)="backSideTalonEvent($event)" [showBackSide]="showback" (click)="pickCard()"></uno-playcard>
                     </ng-container>
-                    <div class="mx-4">
-                        Choose your color:
-                        <uno-pickcolor (colorChoose)="colorChoose($event)"></uno-pickcolor>
+                    <div class="mx-4" *ngIf="showPickColor">
+
+                        <uno-pickcolor (colorChoose)="colorChoose($event)" [showPicker]="showPickColor"></uno-pickcolor>
                     </div>
                 </div>
             </div>

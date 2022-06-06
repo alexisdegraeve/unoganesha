@@ -27,6 +27,7 @@ export class GameComponent implements OnInit {
   selectColor?: ColorUno;
 
   isSayuno = false;
+  showPickColor = false;
 
   score_player1 = 0;
   score_player2 = 0;
@@ -51,10 +52,11 @@ export class GameComponent implements OnInit {
       }
 
       if(talon.figure === FigureUno.PLUS4 || talon.figure === FigureUno.JOKER) {
-        let nb =   Math.floor(Math.random() * 5);
-        this.selectColor = nb;
+        this.randomColor();
         console.log('change color auto');
         console.log(this.selectColor);
+      } else {
+        this.selectColor = talon.color;
       }
 
       /*if(plusCard) {
@@ -202,8 +204,13 @@ export class GameComponent implements OnInit {
           this.takeCardNoChoice(this.player2);
         }
 
+        if(cardRemove.figure == this.figureUno.JOKER) {
+          this.showPickColor = true;
+        }
+
         if(cardRemove.figure == this.figureUno.PLUS4) {
           console.log('the computer take 4 cards');
+          this.showPickColor = true;
           this.takeCardNoChoice(this.player2);
           this.takeCardNoChoice(this.player2);
           this.takeCardNoChoice(this.player2);
@@ -232,10 +239,15 @@ export class GameComponent implements OnInit {
 
         if(cardRemove.figure == this.figureUno.PLUS4) {
           console.log('the human take 4 cards');
+          this.randomColor();
           this.takeCardNoChoice(this.player1);
           this.takeCardNoChoice(this.player1);
           this.takeCardNoChoice(this.player1);
           this.takeCardNoChoice(this.player1);
+        }
+
+        if(cardRemove.figure == this.figureUno.JOKER) {
+          this.randomColor();
         }
 
         if(cardRemove.figure == this.figureUno.PLUS2 || cardRemove.figure == this.figureUno.PLUS4 || cardRemove.figure == this.figureUno.PASSE) {
@@ -322,9 +334,15 @@ export class GameComponent implements OnInit {
   colorChoose(color: ColorUno) {
     console.log(' choose color ', this.colorUno[color]);
     this.selectColor = color;
+    this.showPickColor = false;
   }
 
   sayUno() {
     this.isSayuno = true;
+  }
+
+  randomColor() {
+    let nb =   Math.floor(Math.random() * 5);
+    this.selectColor = nb;
   }
 }
