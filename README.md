@@ -1,5 +1,5 @@
 # Uno Ganesha
-Uno Game version Ganesha
+no Game version Ganesha 2025
 
 To install it just make a git clone
 
