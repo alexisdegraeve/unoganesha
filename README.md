@@ -12,3 +12,6 @@ Run the Web application with:
 GG ;) <br />
 <b> Good Game :)</b>
  
+
+# History 
+> Upgrade Angular 13 to 19
