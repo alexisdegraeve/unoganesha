@@ -4,9 +4,10 @@ import { FigureUno } from '../Enum/figure';
 import { ICardUno } from '../Model/carduno';
 
 @Component({
-  selector: 'uno-playcard',
-  templateUrl: './playcard.component.html',
-  styleUrls: ['./playcard.component.scss']
+    selector: 'uno-playcard',
+    templateUrl: './playcard.component.html',
+    styleUrls: ['./playcard.component.scss'],
+    standalone: false
 })
 export class PlaycardComponent implements OnInit {
   @Input() card :ICardUno = {figure: 1, color: ColorUno.Black, showBack: true};

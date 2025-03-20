@@ -5,9 +5,10 @@ import { FigureUno } from 'src/app/unocommon/Enum/figure';
 import { ICardUno } from 'src/app/unocommon/Model/carduno';
 
 @Component({
-  selector: 'uno-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+    selector: 'uno-game',
+    templateUrl: './game.component.html',
+    styleUrls: ['./game.component.scss'],
+    standalone: false
 })
 export class GameComponent implements OnInit {
   colorUno: typeof ColorUno = ColorUno;
