@@ -103,6 +103,13 @@ $card-black: #1e1916;
     }
 }
 
+@media (max-width: 768px) {
+    .carduno {
+        height: 12.5rem;
+        width: 9rem;
+    }
+}
+
 .carduno-back {
     .carduno-inside {
         display: flex;
