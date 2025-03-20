@@ -14,4 +14,5 @@ GG ;) <br />
  
 
 # History 
+> Fixing Responsive
 > Upgrade Angular 13 to 19
