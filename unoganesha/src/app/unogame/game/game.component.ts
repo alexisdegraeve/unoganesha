@@ -25,7 +25,7 @@ export class GameComponent implements OnInit {
   showback = false;
   changePlayer = new Subject<boolean>();
   changeTalon = new Subject<ICardUno>();
-  selectColor?: ColorUno;
+  // selectColor?: ColorUno;
 
   isSayuno = false;
   showPickColor = false;
@@ -205,7 +205,7 @@ export class GameComponent implements OnInit {
           this.takeCardNoChoice(this.player2);
         }
 
-        if(cardRemove && !(cardRemove.figure == this.figureUno.PLUS2 || cardRemove.figure == this.figureUno.PLUS4 || cardRemove.figure == this.figureUno.PASSE)) {
+        if(cardRemove && !(cardRemove.figure == this.figureUno.PLUS2 || cardRemove.figure == this.figureUno.PLUS4 || cardRemove.figure == this.figureUno.PASSE ||  cardRemove.figure == this.figureUno.INV )) {
           this.changeUser(false);
         }
 
@@ -218,12 +218,14 @@ export class GameComponent implements OnInit {
 
         if(cardRemove.figure == this.figureUno.PASSE) {
           console.log('Player 1 can not play');
+          this.changePlayer.next(this.realplayer);
         }
 
         if(cardRemove.figure == this.figureUno.PLUS2) {
           console.log('the player 1 can not play and take 2 cards');
           this.takeCardNoChoice(this.player1);
           this.takeCardNoChoice(this.player1);
+          this.changePlayer.next(this.realplayer);
         }
 
         if(cardRemove.figure == this.figureUno.PLUS4) {
@@ -234,6 +236,7 @@ export class GameComponent implements OnInit {
           this.takeCardNoChoice(this.player1);
           this.takeCardNoChoice(this.player1);
           this.takeCardNoChoice(this.player1);
+          this.changePlayer.next(this.realplayer);
         }
 
         if(cardRemove.figure == this.figureUno.JOKER) {
@@ -345,7 +348,7 @@ export class GameComponent implements OnInit {
 
   colorChoose(color: ColorUno) {
     console.log(' choose color ', this.colorUno[color]);
-    this.selectColor = color;
+    // this.selectColor = color;
     // Carte du talon prend la couleur
     this.cardTalon[this.cardTalon.length -1].color = color;
     this.showPickColor = false;
@@ -357,7 +360,7 @@ export class GameComponent implements OnInit {
 
   randomColor() {
     let nb =   Math.floor(Math.random() * 4);
-    this.selectColor = nb;
+    // this.selectColor = nb;
     //affecte au talon la couleur
     this.cardTalon[this.cardTalon.length -1].color = nb;
   }
@@ -371,7 +374,7 @@ export class GameComponent implements OnInit {
         console.log(this.selectColor);
         console.log('select color random ', this.selectColor);
       } else {
-        this.selectColor = lastCard.color;
+        // this.selectColor = lastCard.color;
         console.log('select color ', this.selectColor);
       }
     }
@@ -454,8 +457,14 @@ export class GameComponent implements OnInit {
 
     if( !playable) {
       this.wrongCard = true;
+    }else {
+      this.cardSelectIndex = -1;
     }
 
     /* ev.target.appendChild(document.getElementById(data)); */
+  }
+
+  get selectColor():ColorUno {
+    return this.cardTalon[this.cardTalon.length -1].color;
   }
 }

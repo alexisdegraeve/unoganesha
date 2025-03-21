@@ -33,7 +33,7 @@
                 <!-- Texte et informations (Colonne de droite) -->
                 <div class="col-auto d-flex flex-column">
                     <span class="uno-score">Computer</span>
-                    <div *ngIf="!realplayer">I'm playing...</div>
+                    <div *ngIf="!realplayer" class="text-white">I'm playing...</div>
                     <div *ngIf="player2.length == 2" class="text-warning fw-bold">UNO !</div>
                     <span class="uno-score">Score: {{score_player2}}</span>
                 </div>
@@ -85,7 +85,7 @@
 
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" *ngIf="player1.length > 0 && player2.length > 0">
                     <p class="text-white">Ready Player One ?</p>
                     <div class="uno-grid">
                         <ng-container *ngFor="let card of player1; let i = index">
@@ -96,7 +96,7 @@
                         </ng-container>
                     </div>
                 </div>
-                <div class="card-footer border-0 bg-transparent d-flex align-items-center ">
+                <div class="card-footer border-0 bg-transparent d-flex align-items-center" *ngIf="player1.length > 0 && player2.length > 0">
                     <a type="button " class="ms-4 btn btn-lg btn-outline-warning " (click)="sayUno() " *ngIf="player1.length==2 "> UNO</a>
                     <a type="button " class="ms-4 btn  btn-lg btn-outline-light " (click)="passCardFromHuman() "> SKIP</a>
                     <button class="ms-4 btn  btn-lg btn-warning pick-btn text-white" (click)="selectPickCard()" [disabled]="!isSelectedCard">
@@ -114,12 +114,6 @@
 
     </div>
 
-    <p class="text-white">
-        PLAYER 1 : {{ player1 | json}} {{ player1.length}}
-    </p>
-    <p class="text-white">
-        PLAYER 2 : {{ player2 | json}} {{ player2.length}}
-    </p>
 </div>
 
 <uno-footer></uno-footer>
