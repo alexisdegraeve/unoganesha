@@ -22,6 +22,8 @@ export class PlaycardComponent implements OnInit {
 
   @Output() cardRemoveEvent = new EventEmitter<ICardUno>();
 
+  @Output() selectCardEvent = new EventEmitter<ICardUno>();
+
 
   constructor() { }
 
@@ -54,6 +56,10 @@ export class PlaycardComponent implements OnInit {
   changeSide() {
     this.showBackSide=!this.showBackSide;
     this.backSideEvent.emit(this.showBackSide);
+  }
+
+  selectCard() {
+    this.selectCardEvent.emit(this.card);
   }
 
   putCard() {

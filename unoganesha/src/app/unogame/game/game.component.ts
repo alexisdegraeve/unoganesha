@@ -33,6 +33,9 @@ export class GameComponent implements OnInit {
   score_player1 = 0;
   score_player2 = 0;
 
+  cardSelect: ICardUno | undefined = undefined;
+  cardSelectIndex = -1;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -357,7 +360,43 @@ export class GameComponent implements OnInit {
         console.log('select color ', this.selectColor);
       }
     }
+  }
 
+  selectPickCard() {
+    console.log('selectPickCard');
+  }
+
+  // cardSelected(cardSelect: ICardUno) {
+  //   if (this.checkSelectCard(cardSelect)) {
+  //       // Si déjà sélectionné alors déselectionné
+  //       this.cardSelect = undefined;
+  //   } else {
+  //     this.cardSelect = {... cardSelect};
+  //     console.log('card SELECTED ', this.cardSelect);
+  //   }
+
+  // }
+
+  unSelectCard() {
+
+  }
+
+  checkSelectCard(indexCardPlayer: number) {
+    return  (indexCardPlayer === this.cardSelectIndex);
+  }
+
+  get isSelectedCard() {
+    return this.cardSelectIndex > -1;
+  }
+
+  selectCardPlayer1Index(indexCardPlayer: number) {
+    console.log('cardSelectIndex ', this.cardSelectIndex);
+    console.log('indexCardPlayer ', indexCardPlayer);
+    if(this.cardSelectIndex === indexCardPlayer) {
+      this.cardSelectIndex = -1;
+    } else{
+      this.cardSelectIndex = indexCardPlayer;
+    }
 
   }
 }
