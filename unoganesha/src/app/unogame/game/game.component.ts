@@ -148,15 +148,17 @@ export class GameComponent implements OnInit {
     console.log(selectCard);
   }
 
-  cardRemoveEvent(cardRemove: ICardUno, playerCards: ICardUno[] ) {
-    console.log('card remove ', cardRemove);
-    let index = playerCards.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color));
-    if(cardRemove) {
-      this.cardTalon.push(cardRemove);
-      this.changeTalon.next(cardRemove);
-    }
+  cardRemoveEvent(index: number, playerCards: ICardUno[] ) {
+    // console.log('card remove ', cardRemove);
+    // let index = playerCards.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color));
+
 
     if(index >-1) {
+      let cardRemove: ICardUno = {... playerCards[index]};
+      this.cardTalon.push(cardRemove);
+      this.changeTalon.next(cardRemove);
+
+
       console.log('ICI index');
       playerCards.splice(index, 1);
 
@@ -279,7 +281,7 @@ export class GameComponent implements OnInit {
 
     let lastcard = this.cardTalon[this.cardTalon.length - 1];
     let selectedcard = null;
-    for (const cardP2 of this.player2) {
+    for (const [index, cardP2] of this.player2.entries()) {
       //console.log('checking my cards' , cardP2);
 
       if( (cardP2.color == lastcard.color) || (cardP2.figure == lastcard.figure) || (cardP2.figure == this.figureUno.JOKER) || (cardP2.figure == this.figureUno.PLUS4)
@@ -290,7 +292,7 @@ export class GameComponent implements OnInit {
         selectedcard.showBack = false;
         await this.delay(5);
         console.log('continue');
-        this.cardRemoveEvent(selectedcard, this.player2);
+        this.cardRemoveEvent(index, this.player2);
         this.changeScore(selectedcard, false);
         break;
       }
@@ -364,6 +366,8 @@ export class GameComponent implements OnInit {
 
   selectPickCard() {
     console.log('selectPickCard');
+    this.player1CheckCard();
+    // this.cardRemoveEvent(this.cardSelectIndex, this.player1);
   }
 
   // cardSelected(cardSelect: ICardUno) {
@@ -398,5 +402,32 @@ export class GameComponent implements OnInit {
       this.cardSelectIndex = indexCardPlayer;
     }
 
+  }
+
+
+
+  player1CheckCard() {
+    let data: ICardUno  ={... this.player1[this.cardSelectIndex]};
+    let lastCard: ICardUno = {... this.lastCardTalon()};
+
+
+    if ((data.color == lastCard.color) || (data.figure == lastCard.figure) || (data.figure == this.figureUno.JOKER) || (data.figure == this.figureUno.PLUS4)) {
+      console.log('CARD OK');
+      this.cardRemoveEvent(this.cardSelectIndex, this.player1);
+    }else {
+      console.log('CHECK JOKER ');
+
+      if (lastCard.figure == this.figureUno.JOKER &&  lastCard.color == data.color) {
+        console.log('OK JOKER');
+        this.cardRemoveEvent(this.cardSelectIndex, this.player1);
+      }
+      if (lastCard.figure == this.figureUno.PLUS4 &&  lastCard.color == data.color) {
+        console.log('OK PLUS4');
+        this.cardRemoveEvent(this.cardSelectIndex, this.player1);
+      }
+    }
+
+
+    /* ev.target.appendChild(document.getElementById(data)); */
   }
 }
