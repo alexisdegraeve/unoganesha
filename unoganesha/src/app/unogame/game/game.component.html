@@ -1,16 +1,35 @@
 <uno-header></uno-header>
 <div class="container-fluid pb-5">
-
-
+    <a type="button " class="btn btn-primary mx-2 " (click)="startGame() "> <i class="fas fa-play me-2 icon-size"></i> PLAY</a>
     <div class="row mt-4">
-        <div class="col-12 col-lg-9">
+        <div class="col-12 col-lg-auto">
+            <div class="Talon">
+                <div>
+                    <h5 class="card-title text-white">Talon</h5>
+                    <div class="ms-auto " [class.uno-color-yellow]="selectColor==colorUno.Yellow " [class.uno-color-red]="selectColor==colorUno.Red " [class.uno-color-blue]="selectColor==colorUno.Blue " [class.uno-color-green]="selectColor==colorUno.Green ">
+                    </div>
+                </div>
+                <div>
+                    <ng-container *ngIf="lastCardTalon() ">
+                        <uno-playcard [colorUnoSelect]="selectColor " [card]="lastCardTalon() " (backSideEvent)="backSideTalonEvent($event) " [showBackSide]="showback " (click)="pickCard() "></uno-playcard>
+                    </ng-container>
+                    <div class="mx-4 " *ngIf="showPickColor ">
+
+                        <uno-pickcolor (colorChoose)="colorChoose($event) " [showPicker]="showPickColor "></uno-pickcolor>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12 col-lg-auto">
             <div class="card border-0" [class.uno-shadow-select]="realplayer">
-                <div class="card-header border-0  bg-transparent d-flex align-items-center">
+                <div class="card-header border-0  d-flex align-items-center">
                     <div class="uno-avatar"><i class="fa fa-grin-alt"></i></div>
-                    <h5 class="ms-4 card-title  text-primary">Ready Player One ?</h5>
+                    <h5 class="ms-4 card-title  text-primary">Human</h5>
                     <div class="ms-auto uno-score"> Score : {{score_player1}}</div>
                 </div>
                 <div class="card-body  p-0">
+                    <p>Ready Player One ?</p>
                     <div class="uno-grid">
                         <ng-container *ngFor="let card of player1; let i = index">
                             <div [class.neon-border]="checkSelectCard(i)" (click)="selectCardPlayer1Index(i)">
@@ -21,56 +40,32 @@
                     </div>
                 </div>
                 <div class="card-footer border-0 bg-transparent d-flex align-items-center ">
-                    <a type="button " class="btn btn-outline-primary mx-2 " (click)="startGame() "> START</a>
                     <a type="button " class="btn btn-outline-warning " (click)="sayUno() " *ngIf="player1.length==1 "> UNO</a>
                     <a type="button " class="btn btn-outline-success " (click)="passCardFromHuman() "> PASS</a>
                     <button class="btn btn-primary pick-btn " (click)="selectPickCard()" [disabled]="!isSelectedCard">
-                      <i class="fas fa-hand-pointer "></i> Play this card
-                    </button>
+                    <i class="fas fa-hand-pointer "></i> Play this card
+                  </button>
                 </div>
             </div>
 
-            <div class="card border-0 mt-4 " [class.uno-shadow-select]="!realplayer ">
-                <div class="card-header border-0 bg-transparent d-flex align-items-center ">
-                    <div class="uno-avatar "><i class="fa fa-user-astronaut "></i></div>
-                    <h5 class="ms-4 card-title text-danger ">Player Two </h5>
-                    <div class="ms-auto uno-score "> Score : {{score_player2}}</div>
-                </div>
-                <div class="card-body p-0 ">
-                    <div class="uno-grid ">
-                        <ng-container *ngFor="let card of player2 ">
-                            <uno-playcard [card]="card " [showBackSide]="card.showBack "></uno-playcard>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-        <div class="col-12 col-lg-3 ">
-            <div class="card ">
-                <div class="card-header d-flex align-items-center ">
-                    <h5 class="card-title ">Cards</h5>
-                    <div class="ms-auto " [class.uno-color-yellow]="selectColor==colorUno.Yellow " [class.uno-color-red]="selectColor==colorUno.Red " [class.uno-color-blue]="selectColor==colorUno.Blue " [class.uno-color-green]="selectColor==colorUno.Green ">
-                    </div>
-                </div>
 
-                <div class="card-body d-flex flex-row align-items-center ">
-                    <ng-container *ngIf="lastCardTalon() ">
-                        <uno-playcard [colorUnoSelect]="selectColor " [card]="lastCardTalon() " (backSideEvent)="backSideTalonEvent($event) " [showBackSide]="showback " (click)="pickCard() "></uno-playcard>
-                    </ng-container>
-                    <div class="mx-4 " *ngIf="showPickColor ">
-
-                        <uno-pickcolor (colorChoose)="colorChoose($event) " [showPicker]="showPickColor "></uno-pickcolor>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
 
+    <div class="d-flex flex-column">
+        <div class="uno-avatar "><i class="fa fa-user-astronaut "></i></div>
+        <h5 class="ms-4 card-title text-danger ">Computer</h5>
+        <div class="ms-auto uno-score "> Score : {{score_player2}}</div>
+        <p class="text-white">
+            PLAYER 1 : {{ player1 | json}} {{ player1.length}}
+        </p>
+        <p class="text-white">
+            PLAYER 2 : {{ player2 | json}} {{ player2.length}}
+        </p>
 
-
-
+    </div>
 
 </div>
 
