@@ -21,13 +21,16 @@
 }
 
 .uno-ganesha-logo-right {
-    text-shadow: -4px 1px 1px #000;
     -webkit-text-stroke-width: 0.01em;
     -webkit-text-stroke-color: #fff;
-    color: $color-yellow;
     font-weight: bold;
     font-size: 2.5rem;
     outline-width: thick;
+    background: linear-gradient(to bottom, white, $color-yellow);
+    -webkit-background-clip: text;
+    /* Nécessaire pour les navigateurs Webkit (Chrome, Safari) */
+    color: transparent;
+    /* Le texte devient transparent, mais le dégradé est visible */
 }
 
 .uno-red-circle {
