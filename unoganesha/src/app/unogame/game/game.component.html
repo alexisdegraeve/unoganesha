@@ -20,6 +20,15 @@
                 </div>
 
             </div>
+
+            <div class="d-flex flex-column mt-4">
+                <div class="d-flex">
+                    <div class="uno-avatar "><i class="fa fa-user-astronaut "></i></div>
+                    <h5 class="ms-4 card-title text-white">Computer</h5>
+                </div>
+                <div class="ms-auto uno-score "> Score : {{score_player2}}</div>
+            </div>
+
         </div>
         <div class="col-12 col-lg-auto">
             <div class="card border-0" [class.uno-shadow-select]="realplayer">
@@ -54,19 +63,12 @@
 
     </div>
 
-    <div class="d-flex flex-column">
-        <div class="uno-avatar "><i class="fa fa-user-astronaut "></i></div>
-        <h5 class="ms-4 card-title text-danger ">Computer</h5>
-        <div class="ms-auto uno-score "> Score : {{score_player2}}</div>
-        <p class="text-white">
-            PLAYER 1 : {{ player1 | json}} {{ player1.length}}
-        </p>
-        <p class="text-white">
-            PLAYER 2 : {{ player2 | json}} {{ player2.length}}
-        </p>
-
-    </div>
-
+    <p class="text-white">
+        PLAYER 1 : {{ player1 | json}} {{ player1.length}}
+    </p>
+    <p class="text-white">
+        PLAYER 2 : {{ player2 | json}} {{ player2.length}}
+    </p>
 </div>
 
 <uno-footer></uno-footer>

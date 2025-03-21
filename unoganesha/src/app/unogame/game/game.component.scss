@@ -5,7 +5,7 @@ $card-red: #ed1f21;
 $card-black: #1e1916;
 .uno-grid {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: center;
     width: 100%;
     gap: 30px;
@@ -45,7 +45,7 @@ $card-black: #1e1916;
 }
 
 .uno-avatar {
-    background-color: red;
+    background-color: #333;
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
