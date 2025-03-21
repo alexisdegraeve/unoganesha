@@ -44,14 +44,12 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.changePlayer.subscribe((realplayer) => {
-        if(realplayer) console.log('human to play');
-        if(!realplayer) console.log('computer to play');
         if(!realplayer) {
           this.computerPlay();
         }
       }
     );
-    //this.changePlayer.next(this.realplayer);
+
   }
 
   startGame(): void {
@@ -70,7 +68,6 @@ export class GameComponent implements OnInit {
 
   initGame() {
     this.initCards();
-    console.log(this.gamecard.length);
   }
 
   initCards(){
@@ -80,7 +77,6 @@ export class GameComponent implements OnInit {
     }
     this.addExtraCard(4, this.figureUno.JOKER);
     this.addExtraCard(4, this.figureUno.PLUS4);
-    //console.log(' original ', this.gamecard);
   }
 
   addCard(start: number, total: number, color: ColorUno) {
@@ -104,7 +100,6 @@ export class GameComponent implements OnInit {
       this.gamecard[j] = this.gamecard[index];
       this.gamecard[index] = swap;
     }
-    //console.log(' shuffle ', this.gamecard);
   }
 
   distributeCard() {
@@ -140,12 +135,6 @@ export class GameComponent implements OnInit {
 
 
   logCards() {
-    /* console.log('--- logs ---- ' , Date.now.toString());
-    console.log('cards ', this.gamecard);
-    console.log('player1 ', this.player1);
-    console.log('player2 ', this.player2);
-    console.log('human to play: ', this.realplayer);
-    console.log('cardTalon ', this.cardTalon); */
   }
 
   backSideTalonEvent(event: boolean) {
@@ -153,22 +142,15 @@ export class GameComponent implements OnInit {
   }
 
   putCardPlayer1Event(selectCard: ICardUno) {
-    console.log('double click');
-    console.log(selectCard);
   }
 
   cardRemoveEvent(index: number, playerCards: ICardUno[] ) {
-    // console.log('card remove ', cardRemove);
-    // let index = playerCards.findIndex(o => (o.figure==cardRemove.figure) && (o.color == cardRemove.color));
-
 
     if(index >-1) {
       let cardRemove: ICardUno = {... playerCards[index]};
       this.cardTalon.push(cardRemove);
       this.changeTalon.next(cardRemove);
 
-
-      console.log('ICI index');
       playerCards.splice(index, 1);
 
       if(this.realplayer) {
@@ -176,7 +158,6 @@ export class GameComponent implements OnInit {
 
         if(playerCards.length==1 ) {
           if(this.isSayuno){
-            console.log('GAGNE ! Player 1');
           } else {
             this.takeCardNoChoice(this.player1);
           }
@@ -294,7 +275,6 @@ export class GameComponent implements OnInit {
     let lastcard = this.cardTalon[this.cardTalon.length - 1];
     let selectedcard = null;
     for (const [index, cardP2] of this.player2.entries()) {
-      //console.log('checking my cards' , cardP2);
 
       if( (cardP2.color == lastcard.color) || (cardP2.figure == lastcard.figure) || (cardP2.figure == this.figureUno.JOKER) || (cardP2.figure == this.figureUno.PLUS4)
           || ( (cardP2.color == this.selectColor) && (lastcard.figure == this.figureUno.JOKER))
@@ -381,21 +361,9 @@ export class GameComponent implements OnInit {
   }
 
   selectPickCard() {
-    console.log('selectPickCard');
     this.player1CheckCard();
-    // this.cardRemoveEvent(this.cardSelectIndex, this.player1);
   }
 
-  // cardSelected(cardSelect: ICardUno) {
-  //   if (this.checkSelectCard(cardSelect)) {
-  //       // Si déjà sélectionné alors déselectionné
-  //       this.cardSelect = undefined;
-  //   } else {
-  //     this.cardSelect = {... cardSelect};
-  //     console.log('card SELECTED ', this.cardSelect);
-  //   }
-
-  // }
 
   unSelectCard() {
 
@@ -428,28 +396,24 @@ export class GameComponent implements OnInit {
     let playable = false;
     this.wrongCard = false;
 
-    console.log('CHECK player1CheckCard');
-
-    console.log(data);
-    console.log(lastCard);
     if(this.player1.length > 2) {
       this.isSayuno = false;
     }
 
     if ((data.color == lastCard.color) || (data.figure == lastCard.figure) || (data.figure == this.figureUno.JOKER) || (data.figure == this.figureUno.PLUS4)) {
-      console.log('CARD OK');
+      //console.log('CARD OK');
       playable = true;
       this.cardRemoveEvent(this.cardSelectIndex, this.player1);
     } else {
-      console.log('CHECK JOKER ');
+      //console.log('CHECK JOKER ');
 
       if (lastCard.figure == this.figureUno.JOKER &&  lastCard.color == data.color) {
-        console.log('OK JOKER');
+        //console.log('OK JOKER');
         playable = true;
         this.cardRemoveEvent(this.cardSelectIndex, this.player1);
       }
       if (lastCard.figure == this.figureUno.PLUS4 &&  lastCard.color == data.color) {
-        console.log('OK PLUS4');
+        //console.log('OK PLUS4');
         playable = true;
         this.cardRemoveEvent(this.cardSelectIndex, this.player1);
       }

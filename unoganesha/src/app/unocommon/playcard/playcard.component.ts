@@ -69,42 +69,29 @@ export class PlaycardComponent implements OnInit {
   dragCard(event: any) {
     let j = JSON.stringify(this.card);
     event.dataTransfer.setData("card", j);
-    console.log(event);
   }
 
   allowDrop(event: any) {
     event.preventDefault();
-    console.log('allowdrop');
   }
 
 
   dropCard(event: any) {
     event.preventDefault();
     var data = JSON.parse(event.dataTransfer.getData("card")) as ICardUno;
-    console.log(data);
 
     if ((data.color == this.card.color) || (data.figure == this.card.figure) || (data.figure == this.figureUno.JOKER) || (data.figure == this.figureUno.PLUS4)) {
-      console.log('CARD OK');
       this.cardRemoveEvent.emit(data);
     }else {
-      console.log('CHECK JOKER ');
-      console.log(this.colorUnoSelect);
-      console.log(data);
-      console.log(this.figureUno);
+
       if (this.card.figure == this.figureUno.JOKER &&  this.colorUnoSelect == data.color) {
-        console.log('OK JOKER');
-        console.log(this.colorUnoSelect);
         this.cardRemoveEvent.emit(data);
       }
       if (this.card.figure == this.figureUno.PLUS4 &&  this.colorUnoSelect == data.color) {
-        console.log('OK PLUS4');
-        console.log(this.colorUnoSelect);
         this.cardRemoveEvent.emit(data);
       }
     }
 
-
-    /* ev.target.appendChild(document.getElementById(data)); */
   }
 
 }
