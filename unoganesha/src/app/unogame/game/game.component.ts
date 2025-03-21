@@ -35,6 +35,10 @@ export class GameComponent implements OnInit {
 
   cardSelect: ICardUno | undefined = undefined;
   cardSelectIndex = -1;
+  wrongCard = false;
+
+  isStartGame = false;
+
 
   constructor() { }
 
@@ -57,6 +61,7 @@ export class GameComponent implements OnInit {
     this.setTalonCard();
     this.firstTimeNoPlayer();
     this.logCards();
+    this.isStartGame = true;
   }
 
   initGame() {
@@ -337,6 +342,8 @@ export class GameComponent implements OnInit {
   colorChoose(color: ColorUno) {
     console.log(' choose color ', this.colorUno[color]);
     this.selectColor = color;
+    // Carte du talon prend la couleur
+    this.cardTalon[this.cardTalon.length -1].color = color;
     this.showPickColor = false;
   }
 
@@ -347,6 +354,8 @@ export class GameComponent implements OnInit {
   randomColor() {
     let nb =   Math.floor(Math.random() * 4);
     this.selectColor = nb;
+    //affecte au talon la couleur
+    this.cardTalon[this.cardTalon.length -1].color = nb;
   }
 
   firstTimeNoPlayer() {
@@ -409,24 +418,39 @@ export class GameComponent implements OnInit {
   player1CheckCard() {
     let data: ICardUno  ={... this.player1[this.cardSelectIndex]};
     let lastCard: ICardUno = {... this.lastCardTalon()};
+    let playable = false;
+    this.wrongCard = false;
 
+    console.log('CHECK player1CheckCard');
+
+    console.log(data);
+    console.log(lastCard);
+    if(this.player1.length > 2) {
+      this.isSayuno = false;
+    }
 
     if ((data.color == lastCard.color) || (data.figure == lastCard.figure) || (data.figure == this.figureUno.JOKER) || (data.figure == this.figureUno.PLUS4)) {
       console.log('CARD OK');
+      playable = true;
       this.cardRemoveEvent(this.cardSelectIndex, this.player1);
-    }else {
+    } else {
       console.log('CHECK JOKER ');
 
       if (lastCard.figure == this.figureUno.JOKER &&  lastCard.color == data.color) {
         console.log('OK JOKER');
+        playable = true;
         this.cardRemoveEvent(this.cardSelectIndex, this.player1);
       }
       if (lastCard.figure == this.figureUno.PLUS4 &&  lastCard.color == data.color) {
         console.log('OK PLUS4');
+        playable = true;
         this.cardRemoveEvent(this.cardSelectIndex, this.player1);
       }
     }
 
+    if( !playable) {
+      this.wrongCard = true;
+    }
 
     /* ev.target.appendChild(document.getElementById(data)); */
   }

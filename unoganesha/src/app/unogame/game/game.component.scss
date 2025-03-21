@@ -76,3 +76,20 @@ $card-black: #1e1916;
     /* Effet de néon */
     /* Bordure arrondie optionnelle */
 }
+
+.computer {
+    background-color: #71b048;
+}
+
+.computer-selected {
+    border: 2px solid red;
+}
+
+.human-selected {
+    border: 2px solid blue;
+}
+
+.human-disabled {
+    background-color: rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+}
