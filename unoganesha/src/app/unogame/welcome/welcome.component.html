@@ -5,65 +5,6 @@
             <uno-playcard [colorUnoSelect]="unocolor" [card]="card" class="uno-playcard"></uno-playcard>
         </a>
     </div>
-
-    <div class="card my-4">
-        <div class="card-body">
-            <h5 class="card-title">Welcome to the GUNO GAME</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-
-            <button class=" btn btn-lg btn-secondary text-light " (click)="toggleRules() ">
-            {{ isRulesVisible ? 'Hide RULES' : 'Show RULES' }}
-          </button>
-
-
-            <div *ngIf="isRulesVisible ">
-
-                <h2>Goal of the Game</h2>
-                <p>The goal of Uno is to be the first player to get rid of all your cards. The first player to play all their cards wins the game.</p>
-
-                <h2>Setting Up the Game</h2>
-                <ul>
-                    <li>Each player starts with 7 cards.</li>
-                    <li>The remaining cards form a draw pile. The top card of the draw pile is turned over to start the discard pile.</li>
-                </ul>
-
-                <h2>Cards and How They Work</h2>
-                <p>There are different colored and numbered cards, as well as special action cards:</p>
-                <ul>
-                    <li><span class="highlight ">Number Cards</span>: Cards numbered from 0 to 9 in four colors (Red, Yellow, Green, Blue).</li>
-                    <li><span class="highlight ">Action Cards</span>:
-                        <ul>
-                            <li><strong>Skip</strong>: The next player loses their turn.</li>
-                            <li><strong>Reverse</strong>: Reverses the direction of play.</li>
-                            <li><strong>Draw Two</strong>: The next player must draw 2 cards and lose their turn.</li>
-                        </ul>
-                    </li>
-                    <li><span class="highlight ">Wild Cards</span>:
-                        <ul>
-                            <li><strong>Wild Card</strong>: The player chooses the color to play.</li>
-                            <li><strong>Wild Draw Four</strong>: The player chooses the color and forces the next player to draw 4 cards.</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <h2>How to Play</h2>
-                <ul>
-                    <li>Players take turns. On each turn, a player must play a card that matches the color or number of the card on top of the discard pile.</li>
-                    <li>If a player cannot play a card, they must draw a card from the draw pile. If the drawn card can be played, they play it immediately. If not, their turn ends.</li>
-                </ul>
-
-                <h2>The "Uno " Call</h2>
-                <p>When a player has only one card left, they must call out "Uno! " before playing their last card. If a player forgets and another player catches it, they must draw two cards as a penalty.</p>
-
-                <p>To remind you to say "Uno ", a button will appear when you have two cards left. If you do not click it to call "Uno " when required, you will draw a card as a penalty.</p>
-                <button class="uno-button ">Say "Uno "</button>
-
-                <h2>End of the Game</h2>
-                <p>The game ends when a player gets rid of all their cards. They score points based on the cards left in the other players' hands.</p>
-            </div>
-        </div>
-    </div>
 </div>
 
 <uno-footer></uno-footer>

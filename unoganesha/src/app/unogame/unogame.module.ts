@@ -3,11 +3,13 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UnocommonModule } from '../unocommon/unocommon.module';
 import { GameComponent } from './game/game.component';
+import { RulesComponent } from './rules/rules.component';
 
 const routes: Routes = [
   { path: '',  component: WelcomeComponent },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'game', component: GameComponent }
+  { path: 'game', component: GameComponent },
+  { path: 'rules', component: RulesComponent }
 ];
 
 export const routesGame = RouterModule.forChild(routes);
@@ -16,7 +18,8 @@ export const routesGame = RouterModule.forChild(routes);
 @NgModule({
   declarations: [
     WelcomeComponent,
-    GameComponent
+    GameComponent,
+    RulesComponent
   ],
   imports: [
     routesGame,

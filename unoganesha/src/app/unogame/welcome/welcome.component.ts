@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ColorUno } from 'src/app/unocommon/Enum/color';
 import { FigureUno } from 'src/app/unocommon/Enum/figure';
 import { ICardUno } from 'src/app/unocommon/Model/carduno';
@@ -10,17 +10,10 @@ import { ICardUno } from 'src/app/unocommon/Model/carduno';
     encapsulation: ViewEncapsulation.None,
     standalone: false
 })
-export class WelcomeComponent implements OnInit {
-  isRulesVisible = false;
+export class WelcomeComponent {
   constructor() { }
   unocolor: ColorUno = ColorUno.Blue;
   card: ICardUno  = {figure: FigureUno.NUM1, color: ColorUno.Black,  showBack: false};
 
-  ngOnInit(): void {
-  }
-
-  toggleRules() {
-    this.isRulesVisible = !this.isRulesVisible;
-  }
 
 }
