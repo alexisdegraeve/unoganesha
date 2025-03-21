@@ -1,10 +1,13 @@
+@use '.././.././../styles' as *;
 .navbar-brand {
-    font-size: 25px;
+    font-size: 2rem;
     text-transform: uppercase;
     display: flex;
     flex-direction: column;
-    background: red;
-    border-radius: 50%;
+}
+
+.navbar-nav {
+    font-size: 1.25rem;
 }
 
 .uno-ganesha-logo {
@@ -21,9 +24,9 @@
     text-shadow: -4px 1px 1px #000;
     -webkit-text-stroke-width: 0.01em;
     -webkit-text-stroke-color: #fff;
-    color: #f2dc33;
+    color: $color-yellow;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 2.5rem;
     outline-width: thick;
 }
 

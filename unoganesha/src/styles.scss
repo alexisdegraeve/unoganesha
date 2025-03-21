@@ -1,6 +1,9 @@
 @use "sass:map";
+$color-red :#D50032;
+$color-yellow: #FFEB3B;
 body {
     font-size: 1rem;
+    background-color: $color-red;
 }
 
 $spacer: 1rem !default;
