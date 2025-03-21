@@ -64,6 +64,10 @@ export class GameComponent implements OnInit {
     this.isStartGame = true;
   }
 
+  stopGame() {
+    this.isStartGame = false;
+  }
+
   initGame() {
     this.initCards();
     console.log(this.gamecard.length);

@@ -1,24 +1,60 @@
 <uno-header></uno-header>
 <div class="container-fluid pb-5">
-    <a type="button " class="btn btn-primary mx-2 " (click)="startGame() "> <i class="fas fa-play me-2 icon-size" *ngIf="!this.isStartGame"></i> PLAY</a>
+    <div class="top-bar">
+        <a type="button " class="btn btn-lg btn-dark " (click)="startGame()" *ngIf="!this.isStartGame"> <i class="fas fa-play me-2 icon-size"></i> PLAY</a>
+        <a type="button " class="btn btn-lg btn-dark " (click)="stopGame()" *ngIf="this.isStartGame"> <i class="fas fa-stop me-2 icon-size"></i> STOP</a>
 
-    <div class="notification" *ngIf="this.isStartGame">
-        <div class="alert alert-success" role="alert" *ngIf="player1.length === 0">
-            Well done! You win :)
+        <div class="ms-4 notification" *ngIf="this.isStartGame">
+            <!-- Message de victoire -->
+            <div class="alert alert-success d-flex align-items-center" role="alert" *ngIf="player1.length === 0">
+                <i class="fas fa-trophy me-2 fa-lg text-warning"></i>
+                <strong>Well done! You win !</strong>
+            </div>
+
+            <!-- Message de défaite -->
+            <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="player2.length === 0">
+                <i class="fas fa-sad-tear me-2 fa-lg"></i>
+                <strong>Sorry, you lose !</strong>
+            </div>
         </div>
-        <div class="alert alert-danger" role="alert" *ngIf="player2.length === 0">
-            Sorry you lose :(
-        </div>
+
     </div>
+
+    <div>
+        <div class="d-flex flex-column mt-4 computer" [class.computer-selected]="!realplayer">
+            <div class="row align-items-center">
+                <!-- Avatar (Colonne de gauche) -->
+                <div class="col-auto">
+                    <div class="uno-avatar">
+                        <i class="fa fa-user-astronaut fa-2x"></i>
+                    </div>
+                </div>
+
+                <!-- Texte et informations (Colonne de droite) -->
+                <div class="col-auto d-flex flex-column">
+                    <span class="uno-score">Computer</span>
+                    <div *ngIf="!realplayer">I'm playing...</div>
+                    <div *ngIf="player2.length == 2" class="text-warning fw-bold">UNO !</div>
+                    <span class="uno-score">Score: {{score_player2}}</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
     <div class="row mt-4" *ngIf="this.isStartGame">
         <div class="col-12 col-lg-auto">
             <div class="Talon">
                 <div>
-                    <h5 class="card-title text-white">Talon</h5>
-                    <div class="ms-auto " [class.uno-color-yellow]="selectColor==colorUno.Yellow " [class.uno-color-red]="selectColor==colorUno.Red " [class.uno-color-blue]="selectColor==colorUno.Blue " [class.uno-color-green]="selectColor==colorUno.Green ">
+                    <h5 class="card-title text-white text-center">Talon</h5>
+                    <div class="color-select">
+                        <span class="text-white">Color Selected</span>
+                        <div class="ms-auto " [class.uno-color-yellow]="selectColor==colorUno.Yellow " [class.uno-color-red]="selectColor==colorUno.Red " [class.uno-color-blue]="selectColor==colorUno.Blue " [class.uno-color-green]="selectColor==colorUno.Green ">
+                        </div>
                     </div>
                 </div>
-                <div>
+                <div class="mt-2">
                     <ng-container *ngIf="lastCardTalon() ">
                         <uno-playcard [colorUnoSelect]="selectColor " [card]="lastCardTalon() " (backSideEvent)="backSideTalonEvent($event) " [showBackSide]="showback " (click)="pickCard() "></uno-playcard>
                     </ng-container>
@@ -30,27 +66,27 @@
 
             </div>
 
-            <div class="d-flex flex-column mt-4 computer" [class.computer-selected]="!realplayer">
-                <div class="d-flex">
-                    <div class="uno-avatar "><i class="fa fa-user-astronaut "></i></div>
-                    <h5 class="ms-4 card-title text-white">Computer</h5>
-                </div>
-                <div *ngIf="!realplayer">I'm playing...</div>
-                <div *ngIf="player2.length == 2">UNO !</div>
-                <div class="ms-auto uno-score "> Score : {{score_player2}}</div>
-
-            </div>
 
         </div>
         <div class="col-12 col-lg-auto">
-            <div class="card" [class.uno-shadow-select]="realplayer" [class.human-selected]="realplayer" [class.human-disabled]="!realplayer">
-                <div class="card-header border-0  d-flex align-items-center">
-                    <div class="uno-avatar"><i class="fa fa-grin-alt"></i></div>
-                    <h5 class="ms-4 card-title  text-primary">Human</h5>
-                    <div class="ms-auto uno-score"> Score : {{score_player1}}</div>
+            <div class="human" [class.human-selected]="realplayer" [class.human-disabled]="!realplayer">
+                <div>
+                    <div class="row align-items-center">
+                        <!-- Avatar (Colonne de gauche) -->
+                        <div class="col-auto">
+                            <div class="uno-avatar"><i class="fa fa-grin-alt"></i></div>
+                        </div>
+
+                        <!-- Texte et informations (Colonne de droite) -->
+                        <div class="col-auto d-flex flex-column">
+                            <span class="uno-score">Human</span>
+                            <span class="uno-score">Score: {{score_player1}}</span>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="card-body  p-0">
-                    <p>Ready Player One ?</p>
+                <div class="card-body">
+                    <p class="text-white">Ready Player One ?</p>
                     <div class="uno-grid">
                         <ng-container *ngFor="let card of player1; let i = index">
                             <div [class.neon-border]="checkSelectCard(i)" (click)="selectCardPlayer1Index(i)">
@@ -61,9 +97,9 @@
                     </div>
                 </div>
                 <div class="card-footer border-0 bg-transparent d-flex align-items-center ">
-                    <a type="button " class="btn btn-outline-warning " (click)="sayUno() " *ngIf="player1.length==2 "> UNO</a>
-                    <a type="button " class="btn btn-outline-success " (click)="passCardFromHuman() "> PASS</a>
-                    <button class="btn btn-primary pick-btn " (click)="selectPickCard()" [disabled]="!isSelectedCard">
+                    <a type="button " class="ms-4 btn btn-lg btn-outline-warning " (click)="sayUno() " *ngIf="player1.length==2 "> UNO</a>
+                    <a type="button " class="ms-4 btn  btn-lg btn-outline-light " (click)="passCardFromHuman() "> SKIP</a>
+                    <button class="ms-4 btn  btn-lg btn-warning pick-btn text-white" (click)="selectPickCard()" [disabled]="!isSelectedCard">
                     <i class="fas fa-hand-pointer "></i> Play this card
                   </button>
                     <div *ngIf="wrongCard">

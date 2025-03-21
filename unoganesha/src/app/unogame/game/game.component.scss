@@ -45,10 +45,6 @@ $card-black: #1e1916;
 }
 
 .uno-avatar {
-    background-color: #333;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,18 +74,41 @@ $card-black: #1e1916;
 }
 
 .computer {
-    background-color: #71b048;
+    border: 2px solid transparent;
+    padding: 1rem;
+    border-radius: 1rem;
+    max-width: 20rem;
 }
 
 .computer-selected {
-    border: 2px solid red;
+    border: 2px solid rgb(255, 255, 153);
 }
 
 .human-selected {
-    border: 2px solid blue;
+    border: 2px solid rgb(255, 255, 153);
 }
 
 .human-disabled {
     background-color: rgba(255, 255, 255, 0.2);
     pointer-events: none;
+}
+
+.top-bar {
+    display: flex;
+    height: 3.7rem;
+    margin-top: 1rem;
+}
+
+.human {
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.color-select {
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
 }
