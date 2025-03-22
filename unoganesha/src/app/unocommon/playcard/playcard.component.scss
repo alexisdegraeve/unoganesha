@@ -3,6 +3,34 @@ $card-green: #71b048;
 $card-blue: #029ad9;
 $card-red: #ed1f21;
 $card-black: #1e1916;
+.card-uno-animation {
+    animation: rotateCard 10s ease-in-out infinite;
+}
+
+@keyframes rotateCard {
+    0% {
+        transform: rotateY(0deg);
+    }
+    30% {
+        transform: rotateY(180deg);
+    }
+    40% {
+        transform: rotateY(150deg); // Rebond arrière
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+    80% {
+        transform: rotateY(360deg);
+    }
+    90% {
+        transform: rotateY(330deg); // Rebond arrière
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
 .carduno-rotate {
     transform: rotateY(180deg);
 }

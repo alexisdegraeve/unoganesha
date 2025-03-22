@@ -13,6 +13,7 @@ export class PlaycardComponent implements OnInit {
   @Input() card :ICardUno = {figure: 1, color: ColorUno.Black, showBack: true};
   @Input() colorUnoSelect ?: ColorUno;
   @Input() showBackSide = true;
+  @Input() autoAnimation = false;
   //colors = ["blue", "red", "yellow","green","black"];
   figureUno: typeof FigureUno = FigureUno;
   colorUno :  typeof ColorUno = ColorUno;
