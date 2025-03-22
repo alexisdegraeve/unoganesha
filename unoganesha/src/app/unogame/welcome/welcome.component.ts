@@ -11,13 +11,5 @@ import { ICardUno } from 'src/app/unocommon/Model/carduno';
     standalone: false
 })
 export class WelcomeComponent {
-  card: ICardUno  = {figure: FigureUno.NUM1, color: ColorUno.Blue,  showBack: false};
-
-  constructor() {
-    const numberOfColors = Object.keys(ColorUno).length / 2;
-    const numberOfFigures = Object.values(FigureUno).filter(value => typeof value === "number").length
-    this.card.color =  Math.floor(Math.random() * numberOfColors);
-    this.card.figure = Math.floor(Math.random() * numberOfFigures);
-   }
-
+  card: ICardUno  = {figure: FigureUno.JOKER, color: ColorUno.Black,  showBack: false};
 }
