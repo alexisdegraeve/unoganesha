@@ -84,7 +84,8 @@ $card-black: #1e1916;
         .uno-txt {
             font-size: 30px;
             font-weight: bold;
-            font-family: system-ui, Arial, sans-serif;
+            font-family: 'Roboto', 'Arial', sans-serif;
+            /* Mets une police sûre */
             color: #fff;
             text-shadow: 2px 2px #333;
             -webkit-text-stroke-width: 0.5px;
@@ -120,7 +121,8 @@ $card-black: #1e1916;
                 text-rendering: optimizeLegibility;
                 transform: skew(15deg, 15deg);
                 font-size: 130px;
-                font-family: system-ui, Arial, sans-serif;
+                font-family: 'Roboto', 'Arial', sans-serif;
+                /* Mets une police sûre */
                 text-shadow: 4px 2px #333;
                 letter-spacing: -15px;
                 display: flex;
