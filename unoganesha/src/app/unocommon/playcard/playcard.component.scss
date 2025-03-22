@@ -87,8 +87,11 @@ $card-black: #1e1916;
             font-family: system-ui, Arial, sans-serif;
             color: #fff;
             text-shadow: 2px 2px #333;
-            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-width: 0.5px;
             -webkit-text-stroke-color: #333;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
             font-weight: 900;
             .fa-arrows-up-down {
                 transform: rotate(40deg);
@@ -112,8 +115,12 @@ $card-black: #1e1916;
             justify-content: center;
             overflow: hidden;
             .uno-txt {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
                 transform: skew(15deg, 15deg);
                 font-size: 130px;
+                font-family: system-ui, Arial, sans-serif;
                 text-shadow: 4px 2px #333;
                 letter-spacing: -15px;
                 display: flex;
